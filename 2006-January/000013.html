@@ -1,0 +1,194 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Problem with external rrd file identified ...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-January/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Problem%20with%20external%20rrd%20file%20identified%0A%20...&In-Reply-To=%3C43DDE6BB.3000809%40wanadoo.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000011.html">
+   <LINK REL="Next"  HREF="000014.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Problem with external rrd file identified ...</H1>
+    <B>S&#233;bastien CRAMATTE</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Problem%20with%20external%20rrd%20file%20identified%0A%20...&In-Reply-To=%3C43DDE6BB.3000809%40wanadoo.fr%3E"
+       TITLE="[Serverstats-user] Problem with external rrd file identified ...">s.cramatte at wanadoo.fr
+       </A><BR>
+    <I>Mon Jan 30 11:13:15 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000011.html">[Serverstats-user] Problem with external rrd file identified ...
+</A></li>
+        <LI>Next message: <A HREF="000014.html">[Serverstats-user] Problem with external rrd file identified ...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#13">[ date ]</a>
+              <a href="thread.html#13">[ thread ]</a>
+              <a href="subject.html#13">[ subject ]</a>
+              <a href="author.html#13">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>This is a dump of  &quot;rrdtool info /var/lib/mailgraph/mailgraph.rrd&quot; command
+Maybe could help your
+ 
+filename = &quot;/var/lib/mailgraph/mailgraph.rrd&quot;
+rrd_version = &quot;0001&quot;
+step = 60
+last_update = 1138575180
+ds[sent].type = &quot;ABSOLUTE&quot;
+ds[sent].minimal_heartbeat = 120
+ds[sent].min = 0.0000000000e+00
+ds[sent].max = NaN
+ds[sent].last_ds = &quot;UNKN&quot;
+ds[sent].value = 0.0000000000e+00
+ds[sent].unknown_sec = 0
+ds[recv].type = &quot;ABSOLUTE&quot;
+ds[recv].minimal_heartbeat = 120
+ds[recv].min = 0.0000000000e+00
+ds[recv].max = NaN
+ds[recv].last_ds = &quot;UNKN&quot;
+ds[recv].value = 0.0000000000e+00
+ds[recv].unknown_sec = 0
+ds[bounced].type = &quot;ABSOLUTE&quot;
+ds[bounced].minimal_heartbeat = 120
+ds[bounced].min = 0.0000000000e+00
+ds[bounced].max = NaN
+ds[bounced].last_ds = &quot;UNKN&quot;
+ds[bounced].value = 0.0000000000e+00
+ds[bounced].unknown_sec = 0
+ds[rejected].type = &quot;ABSOLUTE&quot;
+ds[rejected].minimal_heartbeat = 120
+ds[rejected].min = 0.0000000000e+00
+ds[rejected].max = NaN
+ds[rejected].last_ds = &quot;UNKN&quot;
+ds[rejected].value = 0.0000000000e+00
+ds[rejected].unknown_sec = 0
+rra[0].cf = &quot;AVERAGE&quot;
+rra[0].rows = 198
+rra[0].pdp_per_row = 8
+rra[0].xff = 5.0000000000e-01
+rra[0].cdp_prep[0].value = 0.0000000000e+00
+rra[0].cdp_prep[0].unknown_datapoints = 0
+rra[0].cdp_prep[1].value = 0.0000000000e+00
+rra[0].cdp_prep[1].unknown_datapoints = 0
+rra[0].cdp_prep[2].value = 0.0000000000e+00
+rra[0].cdp_prep[2].unknown_datapoints = 0
+rra[0].cdp_prep[3].value = 0.0000000000e+00
+rra[0].cdp_prep[3].unknown_datapoints = 0
+rra[1].cf = &quot;AVERAGE&quot;
+rra[1].rows = 198
+rra[1].pdp_per_row = 56
+rra[1].xff = 5.0000000000e-01
+rra[1].cdp_prep[0].value = 0.0000000000e+00
+rra[1].cdp_prep[0].unknown_datapoints = 0
+rra[1].cdp_prep[1].value = 0.0000000000e+00
+rra[1].cdp_prep[1].unknown_datapoints = 0
+rra[1].cdp_prep[2].value = 0.0000000000e+00
+rra[1].cdp_prep[2].unknown_datapoints = 0
+rra[1].cdp_prep[3].value = 0.0000000000e+00
+rra[1].cdp_prep[3].unknown_datapoints = 0
+rra[2].cf = &quot;AVERAGE&quot;
+rra[2].rows = 198
+rra[2].pdp_per_row = 280
+rra[2].xff = 5.0000000000e-01
+rra[2].cdp_prep[0].value = 0.0000000000e+00
+rra[2].cdp_prep[0].unknown_datapoints = 0
+rra[2].cdp_prep[1].value = 0.0000000000e+00
+rra[2].cdp_prep[1].unknown_datapoints = 0
+rra[2].cdp_prep[2].value = 0.0000000000e+00
+rra[2].cdp_prep[2].unknown_datapoints = 0
+rra[2].cdp_prep[3].value = 0.0000000000e+00
+rra[2].cdp_prep[3].unknown_datapoints = 0
+rra[3].cf = &quot;AVERAGE&quot;
+rra[3].rows = 198
+rra[3].pdp_per_row = 3360
+rra[3].xff = 5.0000000000e-01
+rra[3].cdp_prep[0].value = 0.0000000000e+00
+rra[3].cdp_prep[0].unknown_datapoints = 1891
+rra[3].cdp_prep[1].value = 0.0000000000e+00
+rra[3].cdp_prep[1].unknown_datapoints = 1891
+rra[3].cdp_prep[2].value = 0.0000000000e+00
+rra[3].cdp_prep[2].unknown_datapoints = 1891
+rra[3].cdp_prep[3].value = 0.0000000000e+00
+rra[3].cdp_prep[3].unknown_datapoints = 1891
+rra[4].cf = &quot;MAX&quot;
+rra[4].rows = 198
+rra[4].pdp_per_row = 8
+rra[4].xff = 5.0000000000e-01
+rra[4].cdp_prep[0].value = 0.0000000000e+00
+rra[4].cdp_prep[0].unknown_datapoints = 0
+rra[4].cdp_prep[1].value = 0.0000000000e+00
+rra[4].cdp_prep[1].unknown_datapoints = 0
+rra[4].cdp_prep[2].value = 0.0000000000e+00
+rra[4].cdp_prep[2].unknown_datapoints = 0
+rra[4].cdp_prep[3].value = 0.0000000000e+00
+rra[4].cdp_prep[3].unknown_datapoints = 0
+rra[5].cf = &quot;MAX&quot;
+rra[5].rows = 198
+rra[5].pdp_per_row = 56
+rra[5].xff = 5.0000000000e-01
+rra[5].cdp_prep[0].value = 0.0000000000e+00
+rra[5].cdp_prep[0].unknown_datapoints = 0
+rra[5].cdp_prep[1].value = 0.0000000000e+00
+rra[5].cdp_prep[1].unknown_datapoints = 0
+rra[5].cdp_prep[2].value = 0.0000000000e+00
+rra[5].cdp_prep[2].unknown_datapoints = 0
+rra[5].cdp_prep[3].value = 0.0000000000e+00
+rra[5].cdp_prep[3].unknown_datapoints = 0
+rra[6].cf = &quot;MAX&quot;
+rra[6].rows = 198
+rra[6].pdp_per_row = 280
+rra[6].xff = 5.0000000000e-01
+rra[6].cdp_prep[0].value = 0.0000000000e+00
+rra[6].cdp_prep[0].unknown_datapoints = 0
+rra[6].cdp_prep[1].value = 0.0000000000e+00
+rra[6].cdp_prep[1].unknown_datapoints = 0
+rra[6].cdp_prep[2].value = 0.0000000000e+00
+rra[6].cdp_prep[2].unknown_datapoints = 0
+rra[6].cdp_prep[3].value = 0.0000000000e+00
+rra[6].cdp_prep[3].unknown_datapoints = 0
+rra[7].cf = &quot;MAX&quot;
+rra[7].rows = 198
+rra[7].pdp_per_row = 3360
+rra[7].xff = 5.0000000000e-01
+rra[7].cdp_prep[0].value = 0.0000000000e+00
+rra[7].cdp_prep[0].unknown_datapoints = 1891
+rra[7].cdp_prep[1].value = 0.0000000000e+00
+rra[7].cdp_prep[1].unknown_datapoints = 1891
+rra[7].cdp_prep[2].value = 0.0000000000e+00
+rra[7].cdp_prep[2].unknown_datapoints = 1891
+rra[7].cdp_prep[3].value = 0.0000000000e+00
+rra[7].cdp_prep[3].unknown_datapoints = 1891
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000011.html">[Serverstats-user] Problem with external rrd file identified ...
+</A></li>
+	<LI>Next message: <A HREF="000014.html">[Serverstats-user] Problem with external rrd file identified ...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#13">[ date ]</a>
+              <a href="thread.html#13">[ thread ]</a>
+              <a href="subject.html#13">[ subject ]</a>
+              <a href="author.html#13">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20Launch%20Frequency%20%28WAS%3A%20Re%3A%20%5BServerstats-user%5D%20RRDTOOL%20Version%20Exception%29&In-Reply-To=%3CEBFB6CE2-DFB1-4937-97D2-46E133DD950F%40candis.com.cn%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000022.html">
+   <LINK REL="Next"  HREF="000025.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)</H1>
+    <B>Richard Ford</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20Launch%20Frequency%20%28WAS%3A%20Re%3A%20%5BServerstats-user%5D%20RRDTOOL%20Version%20Exception%29&In-Reply-To=%3CEBFB6CE2-DFB1-4937-97D2-46E133DD950F%40candis.com.cn%3E"
+       TITLE="Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)">rford at candis.com.cn
+       </A><BR>
+    <I>Sat Mar  4 13:32:41 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000022.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+        <LI>Next message: <A HREF="000025.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#23">[ date ]</a>
+              <a href="thread.html#23">[ thread ]</a>
+              <a href="subject.html#23">[ subject ]</a>
+              <a href="author.html#23">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I got al working now with a 5 min cron.
+
+Will check into the lazy option now too.
+
+How do I define a graph class that will display hourly and 5 min  
+plots - to go along with the 5 min polling?
+
+Cheers,
+Richard.
+
+
+On 04/03/2006, at 11:21 PM, David Danier wrote:
+
+&gt;&gt;<i> Reading up on RRDTOOL and the different way that it interpolates  
+</I>&gt;&gt;<i> data.
+</I>&gt;&gt;<i> What is a good launch frequency?  Every 5, 10, 15 mins?
+</I>&gt;<i>
+</I>&gt;<i> I use a frequency of one minute, but 5 minutes should be fine for most
+</I>&gt;<i> setups.
+</I>&gt;<i> But thats mainly a question about how accurate you want the graphs  
+</I>&gt;<i> to be.
+</I>&gt;<i>
+</I>&gt;&gt;<i> Also is there a way to set the output to tell browsers not to  
+</I>&gt;&gt;<i> cache the
+</I>&gt;&gt;<i> graphs.  As for a while I believed that it was not working until a
+</I>&gt;&gt;<i> browser refresh (and a graph folder delete) caused the new graphs to
+</I>&gt;&gt;<i> appear.
+</I>&gt;<i>
+</I>&gt;<i> Perhaps the graphs were really not updated by the script. graph.php
+</I>&gt;<i> starts rrdtoo, with --lazy. So rrdtool only writes a new graph if  
+</I>&gt;<i> there
+</I>&gt;<i> is something new to see on it. From the man-page:
+</I>&gt;<i>   [-z|--lazy]
+</I>&gt;<i>     Only generate the graph if the current graph is out of date or not
+</I>&gt;<i>     existent.
+</I>&gt;<i>
+</I>&gt;<i> You can change this in graph.php (line 247):
+</I>&gt;<i>   $rrdgraph-&gt;setLazy(false);
+</I>&gt;<i> (Sorry, no config-option so far)
+</I>&gt;<i>
+</I>&gt;<i> Disabling the caching at all should give the same result.
+</I>&gt;<i> ($config['usecache'] in config/graph.php)
+</I>&gt;<i>
+</I>&gt;<i> Greetings, David Danier
+</I>&gt;<i>
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000022.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+	<LI>Next message: <A HREF="000025.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#23">[ date ]</a>
+              <a href="thread.html#23">[ thread ]</a>
+              <a href="subject.html#23">[ subject ]</a>
+              <a href="author.html#23">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

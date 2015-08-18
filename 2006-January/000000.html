@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-January/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Re%3A%20%5BServerstats-devel%5D%20Traffic%20auf%200%20setzen%3F&In-Reply-To=%3C43B80E79.1030808%40team23.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000001.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?</H1>
+    <B>David Danier</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Re%3A%20%5BServerstats-devel%5D%20Traffic%20auf%200%20setzen%3F&In-Reply-To=%3C43B80E79.1030808%40team23.de%3E"
+       TITLE="[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?">david.danier at team23.de
+       </A><BR>
+    <I>Sun Jan  1 18:16:41 CET 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000001.html">[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> das hier mag zwar eher auf die users List geh&#246;ren, ich finde aber  grad
+</I>&gt;<i> auf die Schnelle nicht den Link zur Anmeldung daf&#252;r...
+</I>
+Ich schick es mal auf beide Listen + einmal direkt zu dir zur&#252;ck, falls
+du auch hier nicht angemeldet bist ;-)
+
+&gt;<i> Jedenfalls habe ich in der Demo gesehen, dass beim Traffic sch&#246;n brav 
+</I>&gt;<i> jeden Monat der count Wert auf Null gesetzt wird.
+</I>&gt;<i> Wie wird das gemacht? Ich vermute das ist eher Sache von IPTables als 
+</I>&gt;<i> von RRD oder Serverstats.
+</I>&gt;<i> K&#246;nntet ihr mir einen Tipp geben wie man das macht?
+</I>
+Soweit ich das richtig in Erinnerung hab reicht ein einfaches 'iptables
+-F' das einmal pro Monat aufgerufen wird.
+Ausschnitt aus 'man iptables':
+  -F, --flush [chain]
+       Flush the selected chain (all the chains in the table if none is
+       given).  This is equivalent to deleting all  the  rules  one  by
+       one.
+
+Viele Gr&#252;&#223;e, David Danier
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20060101/80b30c32/attachment.pgp">https://lists.berlios.de/pipermail/serverstats-user/attachments/20060101/80b30c32/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000001.html">[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#0">[ date ]</a>
+              <a href="thread.html#0">[ thread ]</a>
+              <a href="subject.html#0">[ subject ]</a>
+              <a href="author.html#0">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

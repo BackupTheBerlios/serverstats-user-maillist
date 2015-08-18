@@ -1,0 +1,153 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Xml Config  source example ...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Xml%20Config%20%20source%20example%20...&In-Reply-To=%3C44A642DA.9070809%40team23.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000067.html">
+   <LINK REL="Next"  HREF="000069.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Xml Config  source example ...</H1>
+    <B>David Danier</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Xml%20Config%20%20source%20example%20...&In-Reply-To=%3C44A642DA.9070809%40team23.de%3E"
+       TITLE="[Serverstats-user] Xml Config  source example ...">david.danier at team23.de
+       </A><BR>
+    <I>Sat Jul  1 11:39:38 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000067.html">[Serverstats-user] My first SNMP serverstats result :)
+</A></li>
+        <LI>Next message: <A HREF="000069.html">[Serverstats-user] How can I use same graph  definition with many sources
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I've make this code to parse config from xml file
+</I>&gt;<i> I believe that is quite clean ... I hope that will be usefull
+</I>
+Looks nice, let's see...
+
+&gt;<i> parsexml.php
+</I>
+I think the whole config should be one format, so XML or PHP ;-)
+(Which means: If I use XML, I'll change the config-class)
+
+Everything else looks clean und useable. One problem could be that it
+seems not to be possible to split the config like it is done now. Some
+parts don't need to be loaded in some cases (web-access don't need
+sources available). So I try to omit it in these cases. But I think this
+can be fixed without any hassle...
+
+&gt;<i> &lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+</I>&gt;<i> &lt;sources xmlns=&quot;urn:serverstats&quot; &gt;
+</I>&gt;<i>    [...]
+</I>&gt;<i>    &lt;source type=&quot;snmp&quot; id=&quot;appli1&quot;&gt;
+</I>&gt;<i>              &lt;param id=&quot;host&quot;&gt;192.168.0.12&lt;/param&gt;
+</I>&gt;<i>              &lt;param id=&quot;comunity&quot;&gt;public&lt;/param&gt;
+</I>&gt;<i>              &lt;param id=&quot;objects&quot; datatype=&quot;xsd:array&quot;&gt;
+</I>&gt;<i>              	 &lt;item id=&quot;memtotal&quot;&gt;UCD-SNMP-MIB::memTotalReal.0&lt;/item&gt;
+</I>&gt;<i>                &lt;item id=&quot;memfree&quot;&gt;UCD-SNMP-MIB::memAvailReal.0&lt;/item&gt;
+</I>&gt;<i>                &lt;item id=&quot;1mn&quot;&gt;UCD-SNMP-MIB::laLoad.1&lt;/item&gt;
+</I>&gt;<i>              &lt;/param&gt;
+</I>&gt;<i>    &lt;/source&gt;
+</I>&gt;<i> &lt;/sources&gt; 
+</I>
+What I don't like here are the id-attributes. AFAIK this name should be
+reserved for unique Attributes (for the whole document). So using &quot;name&quot;
+instead would perhaps be better.
+To be clear: Using id to name the sources should be ok (as they are
+unique), but using it to name the params is not ok.
+
+&gt;<i> So  using  xinclude it's easier to make template system and very
+</I>&gt;<i> powerfull config system
+</I>
+Hmmm....xinclude is a nice thing, but after reading your examples I
+think some XSLT-stuff would be nicer.
+I think about combining your template-idea with the idea of
+SimpleConfig. You could have a stripped down version of your
+configuration (like config/simple.php) inside the real configuration
+(currently: config/sources.php and config/graph.php) that has some
+&lt;simplesource&gt;-element that is filled by an XSLT (for source and
+graph-config).
+So you would have a template-system that is flexible enough to simply
+include something and to completely rewrite the given code into some
+nice config.
+
+&gt;<i> To read the config you should need  make  this xml on the fly browsing
+</I>&gt;<i> the /sources directory
+</I>
+Thats the real ugly thing...I don't like dynamic created XML-files only
+to get the system working.
+So I'm thinking about combining the current system with the XML-ideas:
+Files are:
+ * config/sources.xml
+ * config/graph.xml
+ * config/main.xml
+ * ...
+
+The main-config wrapps the filenames as array-indices, if the XML-file
+gets loaded it applies some XSLT-files and parses it into the same
+format the current array is.
+Config-Array-Indices can deeper if the called index belongs to a
+directory (config/foo/bar/bla.xml), but if the index represents a
+xml-file it's a dead-end, means that no subfiles are allowed (perhaps we
+could yust allow xinclude anyway, as this is only some little
+function-call in PHP).
+
+Only problem: You cannot access other XML-files.
+
+Advantages (compared to current system):
+ * Config could know some context, means that an &lt;source&gt;-element is
+different to an &lt;graph&gt;-element.
+ * very complex templates without much work
+
+Of course XML it more complex to write without any editor.
+Perhaps you have some better idea. ;-)
+(Hope I didn't forget anything)
+
+Greetings, David Danier
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 191 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20060701/622c1924/attachment.pgp">https://lists.berlios.de/pipermail/serverstats-user/attachments/20060701/622c1924/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000067.html">[Serverstats-user] My first SNMP serverstats result :)
+</A></li>
+	<LI>Next message: <A HREF="000069.html">[Serverstats-user] How can I use same graph  definition with many sources
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#68">[ date ]</a>
+              <a href="thread.html#68">[ thread ]</a>
+              <a href="subject.html#68">[ subject ]</a>
+              <a href="author.html#68">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

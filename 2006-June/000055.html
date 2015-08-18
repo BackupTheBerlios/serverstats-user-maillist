@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] serverstats, vserver and snmp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20serverstats%2C%20vserver%20and%20snmp&In-Reply-To=%3C44A4F410.1030000%40wanadoo.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000054.html">
+   <LINK REL="Next"  HREF="000056.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] serverstats, vserver and snmp</H1>
+    <B>S&#233;bastien CRAMATTE</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20serverstats%2C%20vserver%20and%20snmp&In-Reply-To=%3C44A4F410.1030000%40wanadoo.fr%3E"
+       TITLE="[Serverstats-user] serverstats, vserver and snmp">s.cramatte at wanadoo.fr
+       </A><BR>
+    <I>Fri Jun 30 11:51:12 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000054.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+        <LI>Next message: <A HREF="000056.html">[Serverstats-user] Feature request
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>David Danier a &#233;crit :
+&gt;&gt;<i> In reality we have got two problems - the length of source  (If you use 
+</I>&gt;&gt;<i> OID or MIB value we will have always the same problem, is insuficient to
+</I>&gt;&gt;<i> remove  underscore)
+</I>&gt;&gt;<i> - the value  (snmp return type and value not just value)
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> #snmpget -v 2c -c public 192.168.0.10 IF-MIB::ifOutOctets.4
+</I>&gt;&gt;<i> IF-MIB::ifOutOctets.4 = Counter32: 278646663
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> As you can see the result value is
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> Counter32: 278646663
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> So we must  remove  &quot;Counter32: &quot;
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Does the php-function snmpget() really return this? The last time I used
+</I>&gt;<i> SNMP with PHP the returned values were only integers. If they are really
+</I>&gt;<i> this way we could use this to &quot;guess&quot; the type of the datasource.
+</I>&gt;<i> Perhaps you could test this by using the following code:
+</I>&gt;<i> &lt;?php
+</I>&gt;<i> $a = snmpwalk(&quot;127.0.0.1&quot;, &quot;public&quot;, &quot;&quot;);
+</I>&gt;<i> var_dump($a);
+</I>&gt;<i> ?&gt;
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> I've done a patch to  snmp source file and now seems to works
+</I>&gt;&gt;<i> You must define source as this
+</I>&gt;&gt;<i>
+</I>&gt;&gt;<i> $config['snmp']['module'] = new snmp('192.168.0.10',
+</I>&gt;&gt;<i> array('ifin'=&gt;'IF-MIB::ifInOctets.4','ifout'=&gt;'IF-MIB::ifOutOctets.4'));
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Added this to and removed the last patch (strip underscores).
+</I>&gt;<i>
+</I>&gt;<i> Greetings, David Danier
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>Maybe depends of net-snmp version ?
+See this extract !
+
+
+...
+
+ string(20) &quot;INTEGER: 2112 KBytes&quot;
+  [1265]=&gt;
+  string(20) &quot;INTEGER: 1624 KBytes&quot;
+  [1266]=&gt;
+  string(20) &quot;INTEGER: 1488 KBytes&quot;
+  [1267]=&gt;
+  string(20) &quot;INTEGER: 1096 KBytes&quot;
+  [1268]=&gt;
+  string(20) &quot;INTEGER: 1284 KBytes&quot;
+  [1269]=&gt;
+  string(25) &quot;INTEGER: notForwarding(2)&quot;
+  [1270]=&gt;
+  string(10) &quot;INTEGER: 0&quot;
+  [1271]=&gt;
+  string(13) &quot;Gauge32: 1000&quot;
+  [1272]=&gt;
+  string(21) &quot;Gauge32: 1440 minutes&quot;
+  [1273]=&gt;
+  string(26) &quot;Counter32: 0 notifications&quot;
+  [1274]=&gt;
+  string(26) &quot;Counter32: 0 notifications&quot;
+  [1275]=&gt;
+ 
+...
+
+
+Waht is the diffrence between gauge32 en counter32 ?
+
+IF-MIB::ifInOctets.4  returns a counter32 but you snmp source config the datasource as gauge ???
+
+I've don't understand yet the difference ?
+
+See you 
+
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000054.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+	<LI>Next message: <A HREF="000056.html">[Serverstats-user] Feature request
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#55">[ date ]</a>
+              <a href="thread.html#55">[ thread ]</a>
+              <a href="subject.html#55">[ subject ]</a>
+              <a href="author.html#55">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

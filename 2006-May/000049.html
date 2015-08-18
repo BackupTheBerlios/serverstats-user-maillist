@@ -1,0 +1,125 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Zend Optimiser
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Zend%20Optimiser&In-Reply-To=%3C84527AF9-7C89-474B-878D-D2570BF21B34%40candis.com.cn%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000047.html">
+   <LINK REL="Next"  HREF="000048.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Zend Optimiser</H1>
+    <B>Richard Ford</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Zend%20Optimiser&In-Reply-To=%3C84527AF9-7C89-474B-878D-D2570BF21B34%40candis.com.cn%3E"
+       TITLE="[Serverstats-user] Zend Optimiser">rford at candis.com.cn
+       </A><BR>
+    <I>Mon May 22 10:07:54 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000047.html">[Serverstats-user] Zend Optimiser
+</A></li>
+        <LI>Next message: <A HREF="000048.html">[Serverstats-user] Re: Zend Optimiser
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#49">[ date ]</a>
+              <a href="thread.html#49">[ thread ]</a>
+              <a href="subject.html#49">[ subject ]</a>
+              <a href="author.html#49">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Neither worked...
+
+Your changes of adding in the new line and commenting out the old -  
+with no Zend yields this:
+
+
+
+Fatal error: Uncaught exception 'Exception' with message 'Offset  
+&quot;config&quot; does not exist' in /var/www/html/serverstats/includes/ 
+config.class.php:118 Stack trace: #0 /var/www/html/serverstats/ 
+includes/config.class.php(118): config::loadOffset() #1 /var/www/html/ 
+serverstats/includes/config.class.php(127): config-&gt;loadOffset 
+('config') #2 /var/www/html/serverstats/config/graph.php(36):  
+config::offsetGet() #3 /var/www/html/serverstats/config/graph.php 
+(36): unknown() #4 /var/www/html/serverstats/includes/config.class.php 
+(87): require_once('/var/www/html/s...') #5 /var/www/html/serverstats/ 
+includes/config.class.php(110): config::loadConfig('config') #6 /var/ 
+www/html/serverstats/includes/config.class.php(127): config- 
+ &gt;loadOffset(Array, '/var/www/html/s...', Object(config)) #7 /var/www/ 
+html/serverstats/includes/functions.php(43): config::offsetGet() #8 / 
+var/www/html/serverstats/includes/functions.php(43): menu() #9 /var/ 
+www/html/serverstats/index.php(40): menu('graph') #10 {main} thrown  
+in /var/www/html/serverstats/includes/config.class.php on line 118
+
+
+
+With Zend, either with the old line commented out and with the new  
+line added too - both occasions lead to a blank page like the  
+attachment.
+
+
+Cheers,
+RF.
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: Picture 1.png
+Type: image/png
+Size: 19762 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20060522/01015973/attachment.png">https://lists.berlios.de/pipermail/serverstats-user/attachments/20060522/01015973/attachment.png</A>&gt;
+-------------- next part --------------
+
+On 16/05/2006, at 6:36 PM, David Danier wrote:
+
+&gt;&gt;<i> Notice: Undefined variable: rootConfig in
+</I>&gt;&gt;<i> /var/www/html/serverstats/config/graph.php on line 36
+</I>&gt;<i>
+</I>&gt;<i> Seems like this Optimizer handles include()'s somehow different  
+</I>&gt;<i> than the
+</I>&gt;<i> normal PHP does. This might be a big problem for using Serverstats.
+</I>&gt;<i>
+</I>&gt;&gt;<i> Do we need to explicitly declare this variable somewhere else first?
+</I>&gt;<i>
+</I>&gt;<i> I have two different workarounds in mind:
+</I>&gt;<i>  * Comment the simpleconfig-lines, this is the only thing using
+</I>&gt;<i> $rootConfig (but simpleconfig will not work after this)
+</I>&gt;<i>  * Put $rootConfig = $GLOBALS['config']; before the simpleconfig-lines
+</I>&gt;<i>
+</I>&gt;<i> If one of these (or both) helps, please tell me. I want to put it into
+</I>&gt;<i> the FAQ, to have a solution available for anyone.
+</I>&gt;<i>
+</I>&gt;<i> Greetings, David Danier
+</I>&gt;<i>
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000047.html">[Serverstats-user] Zend Optimiser
+</A></li>
+	<LI>Next message: <A HREF="000048.html">[Serverstats-user] Re: Zend Optimiser
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#49">[ date ]</a>
+              <a href="thread.html#49">[ thread ]</a>
+              <a href="subject.html#49">[ subject ]</a>
+              <a href="author.html#49">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

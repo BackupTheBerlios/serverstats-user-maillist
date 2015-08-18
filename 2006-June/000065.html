@@ -1,0 +1,141 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Xml Config  architecture ...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Xml%20Config%20%20architecture%20...&In-Reply-To=%3C44A585FF.9020707%40wanadoo.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000064.html">
+   <LINK REL="Next"  HREF="000057.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Xml Config  architecture ...</H1>
+    <B>S&#233;bastien CRAMATTE</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Xml%20Config%20%20architecture%20...&In-Reply-To=%3C44A585FF.9020707%40wanadoo.fr%3E"
+       TITLE="[Serverstats-user] Xml Config  architecture ...">s.cramatte at wanadoo.fr
+       </A><BR>
+    <I>Fri Jun 30 22:13:51 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000064.html">[Serverstats-user] Xml Config and architecture
+</A></li>
+        <LI>Next message: <A HREF="000057.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#65">[ date ]</a>
+              <a href="thread.html#65">[ thread ]</a>
+              <a href="subject.html#65">[ subject ]</a>
+              <a href="author.html#65">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hello,
+
+Sorry for the last empty message :( ...
+
+So  using  xinclude it's easier to make template system and very 
+powerfull config system
+Considering this dir tree :
+
+/sources
+    /templates
+      
+    /server1
+    /server2
+
+And thes xml  files
+
+/sources/templates/memory.xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;template xsi:type=&quot;xsd:array&quot; xmlns=&quot;urn:serverstats&quot; 
+xmlns:xsi=&quot;<A HREF="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</A>&quot;&gt;
+      &lt;item id=&quot;memtotal&quot;&gt;UCD-SNMP-MIB::memTotalReal.0&lt;/item&gt;
+      &lt;item id=&quot;memfree&quot;&gt;UCD-SNMP-MIB::memAvailReal.0&lt;/item&gt;
+       &lt;item id=&quot;1mn&quot;&gt;UCD-SNMP-MIB::laLoad.1&lt;/item&gt;
+&lt;/template&gt;
+
+/sources/templates/if1.xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;template  xsi:type=&quot;xsd:array&quot; xmlns=&quot;urn:serverstats&quot; 
+xmlns:xsi=&quot;<A HREF="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</A>&quot; &gt;
+      &lt;item id=&quot;ifin&quot;&gt;IF-MIB::ifInOctets.1&lt;/item&gt;
+      &lt;item id=&quot;ifout&quot;&gt;IF-MIB::ifOutOctets.1&lt;/item&gt;
+&lt;/template&gt;
+
+
+/sources/server1/memory.xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;source type=&quot;snmp&quot; id=&quot;appli1&quot; xmlns=&quot;urn:serverstats&quot; 
+xmlns:xsi=&quot;<A HREF="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</A>&quot; 
+xmlns:xi=&quot;<A HREF="http://www.w3.org/2001/XInclude">http://www.w3.org/2001/XInclude</A>&quot;&gt;
+             &lt;param id=&quot;host&quot;&gt;192.168.0.12&lt;/param&gt;
+             &lt;param id=&quot;comunity&quot;&gt;public&lt;/param&gt;
+             &lt;param id=&quot;objects&quot;&gt;
+                 &lt;xi:include href=&quot;../templates/memory.xml#*&quot; /&gt;
+                 &lt;xi:include href=&quot;../templates/if1.xml#*&quot; /&gt;
+             &lt;/param&gt;
+&lt;/source&gt;
+
+To read the config you should need  make  this xml on the fly browsing 
+the /sources directory
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;sources type=&quot;snmp&quot; id=&quot;appli1&quot; xmlns=&quot;urn:serverstats&quot; 
+xmlns:xsi=&quot;<A HREF="http://www.w3.org/2001/XMLSchema-instance">http://www.w3.org/2001/XMLSchema-instance</A>&quot; 
+xmlns:xi=&quot;<A HREF="http://www.w3.org/2001/XInclude">http://www.w3.org/2001/XInclude</A>&quot;&gt;
+   &lt;xi:include href=&quot;server1/memory.xml&quot; /&gt;
+   &lt;xi:include href=&quot;server2/memory.xml&quot; /&gt;
+   &lt;xi:include href=&quot;server3/memory.xml&quot; /&gt;
+   &lt;xi:include href=&quot;server4/memory.xml&quot; /&gt;
+&lt;/sources&gt;
+
+It's better and easier to have one source by file because if we use 
+xforms  we can add/remove/update  datas/templates quickly
+To include templates we must use  Xpointer + Xinclude  to include only 
+childs elements ( #* ) . I need to check Xpointer syntax in PHP5
+
+Regards
+
+Sebastien
+
+
+
+
+
+
+
+
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000064.html">[Serverstats-user] Xml Config and architecture
+</A></li>
+	<LI>Next message: <A HREF="000057.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#65">[ date ]</a>
+              <a href="thread.html#65">[ thread ]</a>
+              <a href="subject.html#65">[ subject ]</a>
+              <a href="author.html#65">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

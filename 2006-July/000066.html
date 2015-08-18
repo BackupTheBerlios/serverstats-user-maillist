@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] another SNMP source patch
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-July/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20another%20SNMP%20source%20patch&In-Reply-To=%3C44A6390A.20709%40team23.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000067.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] another SNMP source patch</H1>
+    <B>David Danier</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20another%20SNMP%20source%20patch&In-Reply-To=%3C44A6390A.20709%40team23.de%3E"
+       TITLE="[Serverstats-user] another SNMP source patch">david.danier at team23.de
+       </A><BR>
+    <I>Sat Jul  1 10:57:46 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000067.html">[Serverstats-user] My first SNMP serverstats result :)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#66">[ date ]</a>
+              <a href="thread.html#66">[ thread ]</a>
+              <a href="subject.html#66">[ subject ]</a>
+              <a href="author.html#66">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Seems that snmpgetnext doesn't return correct value. So I've used snmget
+</I>&gt;<i> instead
+</I>
+The Problem with snmpget() is, that it opens one file-descriptor each
+time it is called. So after some (many) calls avery file-operation will
+fail.
+(Unless this is fixed, last time I used SNMP was some PHP 5.0beta version)
+
+But if snmpgetnext() is broken we seem to be forced to use snmpget(). I
+applied your patch with some changes:
+ * snmp_set_valueretrieval(SNMP_VALUE_OBJECT) is called inside
+refreshData(), to avoid problems with different SNMP-sources that need
+different valueretrieval (perhaps someone wants to write a different
+SNMP-source and use both parallel)
+ * some renaming ($object -&gt; $objectName, $objectValue -&gt; $objectId,
+$obj -&gt; $object)
+ * no debug-info ;-)
+
+Greetings, David Danier
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 191 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20060701/82543487/attachment.pgp">https://lists.berlios.de/pipermail/serverstats-user/attachments/20060701/82543487/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000067.html">[Serverstats-user] My first SNMP serverstats result :)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#66">[ date ]</a>
+              <a href="thread.html#66">[ thread ]</a>
+              <a href="subject.html#66">[ subject ]</a>
+              <a href="author.html#66">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

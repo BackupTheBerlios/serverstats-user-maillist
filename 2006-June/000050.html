@@ -1,0 +1,112 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] serverstats, vserver and snmp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20serverstats%2C%20vserver%20and%20snmp&In-Reply-To=%3C44A41DE2.6070609%40wanadoo.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000051.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] serverstats, vserver and snmp</H1>
+    <B>S&#233;bastien CRAMATTE</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20serverstats%2C%20vserver%20and%20snmp&In-Reply-To=%3C44A41DE2.6070609%40wanadoo.fr%3E"
+       TITLE="[Serverstats-user] serverstats, vserver and snmp">s.cramatte at wanadoo.fr
+       </A><BR>
+    <I>Thu Jun 29 20:37:22 CEST 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000051.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm curently testing your SNMP support
+and I try to use simple config (that is not so simple :( .... )
+
+Could you giver an example and  considering this query :
+
+snmpget -v 1 -c public -Oqv 192.168.0.10 IF-MIB::ifInOctets.4 
+IF-MIB::ifOutOctets.4
+
+I need to trace 6  interfaces in the same graph (bonding channel + vlans  )
+This is mean that I'm need todo  6   *  snmpget query  ...
+
+How can I do that ?
+
+
+Thanks for your help
+
+
+
+
+
+David Danier a &#233;crit :
+&gt;&gt;&gt;<i> There is no support for SNMP in Serverstats. It is planned, but I have
+</I>&gt;&gt;&gt;<i> no SNMP-server to test anything I write.
+</I>&gt;&gt;&gt;<i>       
+</I>&gt;&gt;<i> I could provide you snmp access
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Or you could try the source I wrote today:
+</I>&gt;<i> <A HREF="http://svn.berlios.de/svnroot/repos/serverstats/trunk/sources/snmp.php">http://svn.berlios.de/svnroot/repos/serverstats/trunk/sources/snmp.php</A>
+</I>&gt;<i>
+</I>&gt;<i> The source takes three parameters:
+</I>&gt;<i> $host: the host you want to fetch values from
+</I>&gt;<i> $objects: one or more objects
+</I>&gt;<i> 	sample: array('foo.bar', 'bla.fasl')
+</I>&gt;<i> $community: optional community-string
+</I>&gt;<i> 	default: 'public'
+</I>&gt;<i>
+</I>&gt;<i> All values are saved in a GAUGE-field in the rrd. You may change this
+</I>&gt;<i> behavior using addDatasourceDefinition() (see source for details).
+</I>&gt;<i>
+</I>&gt;<i> If you find any erros (the source is untested), please report them or
+</I>&gt;<i> send patches.
+</I>&gt;<i> (perhaps the snmpgetnext() must be replaced by snmpget() for example)
+</I>&gt;<i>
+</I>&gt;<i> You also need the current version of the rrd-class, fetch it from:
+</I>&gt;<i> <A HREF="http://svn.berlios.de/svnroot/repos/serverstats/trunk/includes/rrd.class.php">http://svn.berlios.de/svnroot/repos/serverstats/trunk/includes/rrd.class.php</A>
+</I>&gt;<i> (Perhaps simply try the current SVN)
+</I>&gt;<i>
+</I>&gt;<i> Greetings, David Danier
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000051.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#50">[ date ]</a>
+              <a href="thread.html#50">[ thread ]</a>
+              <a href="subject.html#50">[ subject ]</a>
+              <a href="author.html#50">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

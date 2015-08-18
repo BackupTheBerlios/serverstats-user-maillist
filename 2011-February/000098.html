@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] lmsensors
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2011-February/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20lmsensors&In-Reply-To=%3CBLU0-SMTP47D64163DE5270DEAEDE47F3EF0%40phx.gbl%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] lmsensors</H1>
+    <B>Pierre .</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20lmsensors&In-Reply-To=%3CBLU0-SMTP47D64163DE5270DEAEDE47F3EF0%40phx.gbl%3E"
+       TITLE="[Serverstats-user] lmsensors">petrus_minos at hotmail.com
+       </A><BR>
+    <I>Fri Feb 11 16:21:05 CET 2011</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#98">[ date ]</a>
+              <a href="thread.html#98">[ thread ]</a>
+              <a href="subject.html#98">[ subject ]</a>
+              <a href="author.html#98">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi!
+
+I've serverstats installed and working well on my Ubuntu 10.04 64bits
+computer.
+And now I've problem with an additional source... &quot;lmsensors&quot; founded on
+the Serverstats website !
+If someone has already make it working.
+lm-sensors is on the Ubuntu, working nice with gnome.
+I can &quot;cat&quot; every sensors in a console command.
+But no graph on the website :'(
+
+Thx all !
+
+ps : you can find in at attached file my modified lmsensors.php :
+$this-&gt;sensorpath = '/sys/class/hwmon/hwmon0/device/';
+
+in my graph.php :
+
+$config['list'][] = array(
+	'title' =&gt; 'CPU Temp',
+	'lowerLimit' =&gt; 0,
+	'altAutoscaleMax' =&gt; true,
+	'content' =&gt; array(
+		array(
+		        'type' =&gt; 'AREA',
+                        'source' =&gt; 'lmsensors',
+                        'ds' =&gt; 'temperature1',
+                        'cf' =&gt; 'AVERAGE',
+                        'legend' =&gt; 'cpu temp Celcius',
+                        'color' =&gt; '0000BB',
+		),
+        )
+);
+
+$config['list'][] = array(
+	'title' =&gt; 'CPU Fan',
+	'lowerLimit' =&gt; 0,
+	'altAutoscaleMax' =&gt; true,
+	'content' =&gt; array(
+		array(
+		        'type' =&gt; 'AREA',
+                        'source' =&gt; 'lmsensors',
+                        'ds' =&gt; 'fan2',
+                        'cf' =&gt; 'AVERAGE',
+                        'legend' =&gt; 'cpu fan t/min',
+                        'color' =&gt; '0000BB',
+		),
+        )
+);
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20110211/8e3d6876/attachment.html">https://lists.berlios.de/pipermail/serverstats-user/attachments/20110211/8e3d6876/attachment.html</A>&gt;
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: lmsensors.php
+Type: application/x-php
+Size: 2555 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20110211/8e3d6876/attachment.bin">https://lists.berlios.de/pipermail/serverstats-user/attachments/20110211/8e3d6876/attachment.bin</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#98">[ date ]</a>
+              <a href="thread.html#98">[ thread ]</a>
+              <a href="subject.html#98">[ subject ]</a>
+              <a href="author.html#98">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

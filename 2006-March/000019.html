@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] RRDTOOL Version Exception
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20RRDTOOL%20Version%20Exception&In-Reply-To=%3CA23CBD7B-CB02-44AC-873E-B23DE7857F4D%40candis.com.cn%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000020.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] RRDTOOL Version Exception</H1>
+    <B>Richard Ford</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20RRDTOOL%20Version%20Exception&In-Reply-To=%3CA23CBD7B-CB02-44AC-873E-B23DE7857F4D%40candis.com.cn%3E"
+       TITLE="[Serverstats-user] RRDTOOL Version Exception">rford at candis.com.cn
+       </A><BR>
+    <I>Sat Mar  4 08:06:40 CET 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000020.html">[Serverstats-user] RRDTOOL Version Exception
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#19">[ date ]</a>
+              <a href="thread.html#19">[ thread ]</a>
+              <a href="subject.html#19">[ subject ]</a>
+              <a href="author.html#19">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>G'Day All,
+
+I have installed the latest RRDTOOL of 1.2.12.
+
+I have also setup serverstats - however there are no graphs.
+
+Some digging and manually running the update.php gave me the following:
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/serverstats-user">root at www</A> serverstats]# php update.php
+Working on cpu
+Error:
+exception 'Exception' with message 'rrdtool version check failed!'  
+in /var/www/html/serverstats/includes/rrd.class.php:466
+Stack trace:
+#0 /var/www/html/serverstats/includes/rrd.class.php(466):  
+rrd::checkVersion()
+#1 /var/www/html/serverstats/update.php(83): rrd-&gt;checkVersion('&lt;',  
+'1.2')
+#2 {main}
+Working on load
+Error:
+exception 'Exception' with message 'rrdtool version check failed!'  
+in /var/www/html/serverstats/includes/rrd.class.php:466
+Stack trace:
+#0 /var/www/html/serverstats/includes/rrd.class.php(466):  
+rrd::checkVersion()
+#1 /var/www/html/serverstats/update.php(83): rrd-&gt;checkVersion('&lt;',  
+'1.2')
+#2 {main}
+Working on memory
+Error:
+exception 'Exception' with message 'rrdtool version check failed!'  
+in /var/www/html/serverstats/includes/rrd.class.php:466
+Stack trace:
+#0 /var/www/html/serverstats/includes/rrd.class.php(466):  
+rrd::checkVersion()
+#1 /var/www/html/serverstats/update.php(83): rrd-&gt;checkVersion('&lt;',  
+'1.2')
+#2 {main}
+Working on traffic_proc_eth0
+Error:
+exception 'Exception' with message 'rrdtool version check failed!'  
+in /var/www/html/serverstats/includes/rrd.class.php:466
+Stack trace:
+#0 /var/www/html/serverstats/includes/rrd.class.php(466):  
+rrd::checkVersion()
+#1 /var/www/html/serverstats/update.php(83): rrd-&gt;checkVersion('&lt;',  
+'1.2')
+#2 {main}
+Working on users
+Error:
+exception 'Exception' with message 'rrdtool version check failed!'  
+in /var/www/html/serverstats/includes/rrd.class.php:466
+Stack trace:
+#0 /var/www/html/serverstats/includes/rrd.class.php(466):  
+rrd::checkVersion()
+#1 /var/www/html/serverstats/update.php(83): rrd-&gt;checkVersion('&lt;',  
+'1.2')
+#2 {main}
+[<A HREF="https://lists.berlios.de/mailman/listinfo/serverstats-user">root at www</A> serverstats]#
+
+
+RRDTOOL is located now in the /usr/local/bin directory so is globally  
+available and when run it's output is as follows:
+
+[<A HREF="https://lists.berlios.de/mailman/listinfo/serverstats-user">root at www</A> serverstats]# rrdtool
+RRDtool 1.2.12  Copyright 1997-2005 by Tobias Oetiker &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/serverstats-user">tobi at oetiker.ch</A>&gt;
+                Compiled Mar  4 2006 13:37:12
+
+Usage: rrdtool [options] command command_options
+
+Valid commands: create, update, updatev, graph, dump, restore,
+                 last, first, info, fetch, tune, resize, xport
+
+RRDtool is distributed under the Terms of the GNU General
+Public License Version 2. (www.gnu.org/copyleft/gpl.html)
+
+For more information read the RRD manpages
+
+
+The test scripts for RRDTOOL work so I am pretty sure that they are  
+OK.  Why is my cron failing and/or the update.php.  As far as I can  
+deduce it is due to a failure in the rrdtool versaion check routing  
+in the /include/rrd.class.php file - which makes and external call to  
+rrdtool - which does retrun 1.2.12.... ?
+
+Cheers,
+Richard.
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000020.html">[Serverstats-user] RRDTOOL Version Exception
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#19">[ date ]</a>
+              <a href="thread.html#19">[ thread ]</a>
+              <a href="subject.html#19">[ subject ]</a>
+              <a href="author.html#19">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

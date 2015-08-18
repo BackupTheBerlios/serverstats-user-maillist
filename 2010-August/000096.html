@@ -1,0 +1,96 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] No graphs after editing SimpleConfig (File	not found)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2010-August/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20No%20graphs%20after%20editing%20SimpleConfig%20%28File%0A%09not%20found%29&In-Reply-To=%3C201008101330.46058.p_michalczyk%40mail.berlios.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000095.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] No graphs after editing SimpleConfig (File	not found)</H1>
+    <B>Piotr Michalczyk</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20No%20graphs%20after%20editing%20SimpleConfig%20%28File%0A%09not%20found%29&In-Reply-To=%3C201008101330.46058.p_michalczyk%40mail.berlios.de%3E"
+       TITLE="[Serverstats-user] No graphs after editing SimpleConfig (File	not found)">p_michalczyk at mail.berlios.de
+       </A><BR>
+    <I>Tue Aug 10 13:30:45 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000095.html">[Serverstats-user] No graphs after editing SimpleConfig (File	not found)
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#96">[ date ]</a>
+              <a href="thread.html#96">[ thread ]</a>
+              <a href="subject.html#96">[ subject ]</a>
+              <a href="author.html#96">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Hi,
+</I>&gt;<i> 
+</I>&gt;<i> I'm very new to the serverstats package and Google didn't help me either,
+</I>&gt;<i> so I figured I use the mailinglist. I tried to add the source modules for
+</I>&gt;<i> Apache, Traffic and Ping using the simpleconfig. These new items show up
+</I>&gt;<i> on the stats page ( <A HREF="http://us1.dnss.nl/status/">http://us1.dnss.nl/status/</A> ) but the graphs fail to
+</I>&gt;<i> load. I figured this might be a temporary thing, but I changed this
+</I>&gt;<i> yesterday and it's still like this.
+</I>&gt;<i> 
+</I>&gt;<i> To give an example of the error:
+</I>&gt;<i> -- Ping --
+</I>&gt;<i> 
+</I>&gt;<i> &gt; Error: exception 'Exception' with message 'rrdtool (&quot;/usr/bin/rrdtool
+</I>&gt;<i> &gt; graph
+</I>&gt;<i> &gt; '/usr/share/serverstats/graph/1958000e3fed25d81a9b2f972956ad83.png' -t
+</I>&gt;<i> &gt; 'Ping' -s '-86400' -a 'PNG' -w '550' -h '200' -l '0' -M -z
+</I>&gt;<i> &gt; 'DEF:ping_www_digid_nl_time=/usr/share/serverstats/rrd/ping_www_digid_nl.
+</I>&gt;<i> &gt; rrd:time:AVERAGE' 'LINE:ping_www_digid_nl_time#D764C8:www.digid.nl\n'&quot;)
+</I>&gt;<i> &gt; finished with exitcode 1 ERROR: opening
+</I>&gt;<i> &gt; '/usr/share/serverstats/rrd/ping_www_digid_nl.rrd': No such file or
+</I>&gt;<i> &gt; directory' in /usr/share/serverstats/includes/rrdgraph.class.php:420
+</I>&gt;<i> &gt; Stack trace:
+</I>&gt;<i> &gt; #0 /usr/share/serverstats/graphs.php(248):
+</I>&gt;<i> &gt; rrdgraph-&gt;save('/usr/share/serv...') #1 {main}
+</I>&gt;<i> 
+</I>&gt;<i> Hope someone can help me with this!
+</I>
+Seems, that ping is working for You now.
+
+But there is still no graph for Apache. Serverstats cannot generate this 
+graph, because there is no appropriate data file (.rrd).
+Please send output of:
+    php /usr/share/serverstats/update.php
+command so I can tell You more about reason for this error.
+
+-- 
+mgr in&#380;. Piotr Michalczyk
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000095.html">[Serverstats-user] No graphs after editing SimpleConfig (File	not found)
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#96">[ date ]</a>
+              <a href="thread.html#96">[ thread ]</a>
+              <a href="subject.html#96">[ subject ]</a>
+              <a href="author.html#96">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

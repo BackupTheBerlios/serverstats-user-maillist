@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] No graphs after editing SimpleConfig (File	not found)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2010-August/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20No%20graphs%20after%20editing%20SimpleConfig%20%28File%0A%09not%20found%29&In-Reply-To=%3CAANLkTimXMVw%2B0tb9dU4DyH_KZ3n5gmWUNBp%2B4TnH%3DeoO%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000093.html">
+   <LINK REL="Next"  HREF="000095.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] No graphs after editing SimpleConfig (File	not found)</H1>
+    <B>Pierre L.</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20No%20graphs%20after%20editing%20SimpleConfig%20%28File%0A%09not%20found%29&In-Reply-To=%3CAANLkTimXMVw%2B0tb9dU4DyH_KZ3n5gmWUNBp%2B4TnH%3DeoO%40mail.gmail.com%3E"
+       TITLE="[Serverstats-user] No graphs after editing SimpleConfig (File	not found)">petrus.minos at gmail.com
+       </A><BR>
+    <I>Tue Aug 10 01:09:18 CEST 2010</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000093.html">[Serverstats-user] No graphs after editing SimpleConfig (File not	found)
+</A></li>
+        <LI>Next message: <A HREF="000095.html">[Serverstats-user] No graphs after editing SimpleConfig (File	not found)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#94">[ date ]</a>
+              <a href="thread.html#94">[ thread ]</a>
+              <a href="subject.html#94">[ subject ]</a>
+              <a href="author.html#94">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+I've the same problem with Apache, graph doesn't work :'(
+Nothing found on the web... Good luck, and if you find a solution ;)
+Have fun ;)
+Bye
+
+2010/8/8 Arno M. &lt;<A HREF="https://lists.berlios.de/mailman/listinfo/serverstats-user">itavero at gmail.com</A>&gt;
+
+&gt;<i> Hi,
+</I>&gt;<i>
+</I>&gt;<i> I'm very new to the serverstats package and Google didn't help me either,
+</I>&gt;<i> so I figured I use the mailinglist.
+</I>&gt;<i> I tried to add the source modules for Apache, Traffic and Ping using the
+</I>&gt;<i> simpleconfig.
+</I>&gt;<i> These new items show up on the stats page ( <A HREF="http://us1.dnss.nl/status/">http://us1.dnss.nl/status/</A> )
+</I>&gt;<i> but the graphs fail to load.
+</I>&gt;<i> I figured this might be a temporary thing, but I changed this yesterday and
+</I>&gt;<i> it's still like this.
+</I>&gt;<i>
+</I>&gt;<i> To give an example of the error:
+</I>&gt;<i> -- Ping --
+</I>&gt;<i> &gt; Error: exception 'Exception' with message 'rrdtool (&quot;/usr/bin/rrdtool
+</I>&gt;<i> graph
+</I>&gt;<i> &gt; '/usr/share/serverstats/graph/1958000e3fed25d81a9b2f972956ad83.png'
+</I>&gt;<i> &gt; -t 'Ping' -s '-86400' -a 'PNG' -w '550' -h '200' -l '0' -M -z
+</I>&gt;<i> &gt;
+</I>&gt;<i> 'DEF:ping_www_digid_nl_time=/usr/share/serverstats/rrd/ping_www_digid_nl.rrd:time:AVERAGE'
+</I>&gt;<i> &gt; 'LINE:ping_www_digid_nl_time#D764C8:www.digid.nl\n'&quot;) finished with
+</I>&gt;<i> exitcode 1
+</I>&gt;<i> &gt; ERROR: opening '/usr/share/serverstats/rrd/ping_www_digid_nl.rrd': No
+</I>&gt;<i> such
+</I>&gt;<i> &gt; file or directory' in
+</I>&gt;<i> /usr/share/serverstats/includes/rrdgraph.class.php:420
+</I>&gt;<i> &gt; Stack trace:
+</I>&gt;<i> &gt; #0 /usr/share/serverstats/graphs.php(248):
+</I>&gt;<i> rrdgraph-&gt;save('/usr/share/serv...')
+</I>&gt;<i> &gt; #1 {main}
+</I>&gt;<i>
+</I>&gt;<i>
+</I>&gt;<i> Hope someone can help me with this!
+</I>&gt;<i>
+</I>&gt;<i> Kind Regards,
+</I>&gt;<i> Arno M
+</I>&gt;<i> _______________________________________________
+</I>&gt;<i> Serverstats-user mailing list
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/serverstats-user">Serverstats-user at lists.berlios.de</A>
+</I>&gt;<i> <A HREF="https://lists.berlios.de/mailman/listinfo/serverstats-user">https://lists.berlios.de/mailman/listinfo/serverstats-user</A>
+</I>&gt;<i>
+</I>-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20100810/9e0f0d6c/attachment.html">https://lists.berlios.de/pipermail/serverstats-user/attachments/20100810/9e0f0d6c/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000093.html">[Serverstats-user] No graphs after editing SimpleConfig (File not	found)
+</A></li>
+	<LI>Next message: <A HREF="000095.html">[Serverstats-user] No graphs after editing SimpleConfig (File	not found)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#94">[ date ]</a>
+              <a href="thread.html#94">[ thread ]</a>
+              <a href="subject.html#94">[ subject ]</a>
+              <a href="author.html#94">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-January/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Re%3A%20%5BServerstats-devel%5D%20Traffic%20auf%200%20setzen%3F&In-Reply-To=%3C43B81B9F.3090404%40team23.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000000.html">
+   <LINK REL="Next"  HREF="000002.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?</H1>
+    <B>David Danier</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Re%3A%20%5BServerstats-devel%5D%20Traffic%20auf%200%20setzen%3F&In-Reply-To=%3C43B81B9F.3090404%40team23.de%3E"
+       TITLE="[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?">david.danier at team23.de
+       </A><BR>
+    <I>Sun Jan  1 19:12:47 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000000.html">[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?
+</A></li>
+        <LI>Next message: <A HREF="000002.html">[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Soweit ich das richtig in Erinnerung hab reicht ein einfaches 'iptables
+</I>&gt;<i> -F' das einmal pro Monat aufgerufen wird.
+</I>
+Ok, schlagt mich...ich hab den Teil aus dem man-Page nicht nochmal
+gelesen und einfach auf Absenden geklickt.
+Richtig w&#228;re nat&#252;rlich 'iptables -Z':
+  -Z, --zero [chain]
+        Zero the packet and byte counters in all chains.  It is legal to
+        specify the -L, --list (list) option as well, to see  the  coun-
+        ters immediately before they are cleared. (See above.)
+(-F w&#228;re fatal, da es den kompletten Regelsatz l&#246;scht)
+
+Viele Gr&#252;&#223;e, David Danier
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 256 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20060101/503f8d5e/attachment.pgp">https://lists.berlios.de/pipermail/serverstats-user/attachments/20060101/503f8d5e/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000000.html">[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?
+</A></li>
+	<LI>Next message: <A HREF="000002.html">[Serverstats-user] Re: [Serverstats-devel] Traffic auf 0 setzen?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#1">[ date ]</a>
+              <a href="thread.html#1">[ thread ]</a>
+              <a href="subject.html#1">[ subject ]</a>
+              <a href="author.html#1">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

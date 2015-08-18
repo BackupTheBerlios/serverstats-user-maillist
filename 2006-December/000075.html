@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Strange exception using snmp ...
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-December/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Strange%20exception%20using%20snmp%20...&In-Reply-To=%3C457473F4.2000409%40wanadoo.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   <LINK REL="Next"  HREF="000076.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Strange exception using snmp ...</H1>
+    <B>S&#233;bastien CRAMATTE</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Strange%20exception%20using%20snmp%20...&In-Reply-To=%3C457473F4.2000409%40wanadoo.fr%3E"
+       TITLE="[Serverstats-user] Strange exception using snmp ...">s.cramatte at wanadoo.fr
+       </A><BR>
+    <I>Mon Dec  4 20:16:04 CET 2006</I>
+    <P><UL>
+        
+        <LI>Next message: <A HREF="000076.html">[Serverstats-user] How can I force type as counter for all my snmp	data sources ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#75">[ date ]</a>
+              <a href="thread.html#75">[ thread ]</a>
+              <a href="subject.html#75">[ subject ]</a>
+              <a href="author.html#75">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi,
+
+I've made a graph for QOS and I've this error when I tried to get &quot;MIN&quot;
+  or &quot;MAX&quot; CFs
+
+
+Error:
+exception 'Exception' with message 'rrdtool (&quot;/usr/bin/rrdtool graph
+'/var/www/graph/6cd485f9e15deab7e8fbf6b99b9b8739.png' -t 'QOS Inbound -
+Day' -s '-86400' -a 'PNG' -w '500' -h '150' -b '1000' -l '0' -v
+'bytes/seconds' -M  -z
+'DEF:default=/var/www/rrd/qos_in.rrd:200_13_default:AVERAGE'
+'CDEF:cdef_default=default,8,*'
+'DEF:qos_in_200_13_default=/var/www/rrd/qos_in.rrd:200_13_default:AVERAGE'
+'LINE1:qos_in_200_13_default#157419:Default'
+'VDEF:cdef_default_LAST=cdef_default,LAST'
+'GPRINT:cdef_default_LAST:Cur\:%8.2lf%s'
+'VDEF:cdef_default_MIN=cdef_default,MIN'
+'GPRINT:cdef_default_MIN:Min\:%8.2lf%s'
+'DEF:qos_in_200_11_icmp=/var/www/rrd/qos_in.rrd:200_11_icmp:AVERAGE'
+'LINE1:qos_in_200_11_icmp#FFC73B:Icmp'
+'DEF:qos_in_200_12_interactive=/var/www/rrd/qos_in.rrd:200_12_interactive:AVERAGE'
+'LINE1:qos_in_200_12_interactive#7CB3F1:Interactive'
+'DEF:qos_in_200_14_smtp=/var/www/rrd/qos_in.rrd:200_14_smtp:AVERAGE'
+'LINE1:qos_in_200_14_smtp#D8ACE0:Smtp'
+'DEF:qos_in_200_15_p2p=/var/www/rrd/qos_in.rrd:200_15_p2p:AVERAGE'
+'LINE1:qos_in_200_15_p2p#ED7600:p2p'&quot;) finished with exitcode 1
+ERROR: Unknown function 'MIN' in VDEF 'cdef_default_MIN'
+' in /var/www/includes/rrdgraph.class.php:420
+Stack trace:
+#0 /var/www/graph.php(248): rrdgraph-&gt;save('/var/www/graph/...')
+#1 {main}
+
+
+
+I'm not sure to sure to setup GPRINT correctly
+
+config/graph.php file
+
+	...
+        'content' =&gt; array(
+                array(
+                        'type' =&gt; 'DEF',
+                        'source' =&gt; 'qos_in',
+                        'ds' =&gt; '200_13_default',
+                        'cf' =&gt; 'AVERAGE',
+                        'name' =&gt; 'default'
+                ),
+                array(
+                        'type' =&gt; 'CDEF',
+                        'expression' =&gt; 'default,8,*',
+                        'name' =&gt; 'cdef_default'
+                ),
+
+                array(
+                        'type' =&gt; 'LINE',
+                        'source' =&gt; 'qos_in',
+                        'ds' =&gt; '200_13_default',
+                        'cf' =&gt; 'AVERAGE',
+                        'legend' =&gt; 'Default',
+                        'width' =&gt; 1,
+                        'color' =&gt; '157419'
+                ),
+
+                array(
+                        'type' =&gt; 'GPRINT',
+                        'name' =&gt; 'cdef_default',
+                        'cf' =&gt; 'LAST',
+                        'format' =&gt; 'Cur\:%8.2lf%s'
+                ),
+
+
+               array(
+                        'type' =&gt; 'GPRINT',
+                        'name' =&gt; 'cdef_default',
+                        'cf' =&gt; 'MIN',
+                        'format' =&gt; 'Min\:%8.2lf%s'
+                ),
+
+
+               array(
+                        'type' =&gt; 'GPRINT',
+                        'name' =&gt; 'cdef_default',
+                        'cf' =&gt; 'MAX',
+                        'format' =&gt; 'Max\:%8.2lf%s\n'
+                ),
+
+		...
+
+config/sources.php file
+
+
+$config['qos_in']['module'] = new snmp('localhost',
+        array('200_11_icmp'=&gt;'.1.3.6.1.4.1.2021.255.8.7',
+              '200_12_interactive'=&gt;'.1.3.6.1.4.1.2021.255.8.4',
+              '200_13_default'=&gt;'.1.3.6.1.4.1.2021.255.8.3',
+              '200_14_smtp'=&gt;'.1.3.6.1.4.1.2021.255.8.6',
+              '200_15_p2p'=&gt;'.1.3.6.1.4.1.2021.255.8.5'
+        )
+);
+
+
+I've a made script that return QOS value as SNMP
+Thanks for the help
+
+Regards
+
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: s.cramatte.vcf
+Type: text/x-vcard
+Size: 456 bytes
+Desc: not available
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20061204/71a55937/attachment.vcf">https://lists.berlios.de/pipermail/serverstats-user/attachments/20061204/71a55937/attachment.vcf</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	<LI>Next message: <A HREF="000076.html">[Serverstats-user] How can I force type as counter for all my snmp	data sources ?
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#75">[ date ]</a>
+              <a href="thread.html#75">[ thread ]</a>
+              <a href="subject.html#75">[ subject ]</a>
+              <a href="author.html#75">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

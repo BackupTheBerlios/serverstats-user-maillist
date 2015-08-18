@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Problem with ping statistics
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2011-April/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Problem%20with%20ping%20statistics&In-Reply-To=%3CBANLkTi%3Dodxmspk5Ns_y0Eue-r72oX-4A%2BA%40mail.gmail.com%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Problem with ping statistics</H1>
+    <B>Matt Faraday</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Problem%20with%20ping%20statistics&In-Reply-To=%3CBANLkTi%3Dodxmspk5Ns_y0Eue-r72oX-4A%2BA%40mail.gmail.com%3E"
+       TITLE="[Serverstats-user] Problem with ping statistics">matt.faraday at gmail.com
+       </A><BR>
+    <I>Fri Apr  8 13:18:52 CEST 2011</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi
+
+I am running serverstats 0.8.2-7 on Ubuntu 10.10 maverick
+(2.6.35-28-generic).
+
+I have configured ping statistics using two external hosts in simple.php,
+but serverstats does
+not display any data for these metrics. I notice as well that the demo on
+serverstats
+website also does not show any statistics for the ping metrics either.
+
+Is there a problem with this particular metric?
+
+Here is my configuration
+
+'ping' =&gt; array(
+        'used' =&gt; true,
+        'hosts' =&gt; array('www.google.com','news.bbc.co.uk'),
+        'graphs' =&gt; array(
+            'combined' =&gt; array('used' =&gt; true, 'title' =&gt; 'Ping'),
+            'single' =&gt; array('used' =&gt; true, 'title' =&gt; 'Ping (%s)')
+        )
+    ),
+
+I am also not blocking incoming or outgoing ICMP and I can ping hosts from
+the command line.
+
+Thanks
+
+Matt Faraday
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20110408/bf2efb93/attachment.html">https://lists.berlios.de/pipermail/serverstats-user/attachments/20110408/bf2efb93/attachment.html</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#99">[ date ]</a>
+              <a href="thread.html#99">[ thread ]</a>
+              <a href="subject.html#99">[ subject ]</a>
+              <a href="author.html#99">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

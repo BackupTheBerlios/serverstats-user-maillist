@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] SNMP Support
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2014-January/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20SNMP%20Support&In-Reply-To=%3C52E6BBA2.7050503%40koenigsmail.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000103.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] SNMP Support</H1>
+    <B>Daniel K&#246;nig</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20SNMP%20Support&In-Reply-To=%3C52E6BBA2.7050503%40koenigsmail.de%3E"
+       TITLE="[Serverstats-user] SNMP Support">daniel at koenigsmail.de
+       </A><BR>
+    <I>Mon Jan 27 21:03:46 CET 2014</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000103.html">[Serverstats-user] SNMP Support
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hallo nochmal,
+
+hier mal meine config-Ausschnitt:
+
+$config['nas']['module'] = new snmp('192.168.10.2', array(
+         'MemTotal' =&gt; '1.3.6.1.4.1.2021.4.5.0',
+         'MemFree' =&gt; '1.3.6.1.4.1.2021.4.6.0 ',
+         'Cached' =&gt; '1.3.6.1.4.1.2021.4.11.0 ',
+         '1min' =&gt; '1.3.6.1.4.1.2021.10.1.5.1',
+         '5min' =&gt; '1.3.6.1.4.1.2021.10.1.5.2',
+         '15min' =&gt; '1.3.6.1.4.1.2021.10.1.5.3'),
+         'public');
+
+und die Fehlermeldung bei aufruf von:
+
+sudo php /usr/share/serverstats/update.php
+
+PHP Notice:  A non well formed numeric value encountered in 
+/etc/serverstats/sources.php on line 41
+PHP Fatal error:  Uncaught exception 'Exception' with message 
+'SNMP::__construct() expects parameter 2 to be string, array given' in 
+/etc/serverstats/sources.php:41
+Stack trace:
+#0 /etc/serverstats/sources.php(41): SNMP-&gt;__construct('192.168.10.2', 
+Array, 'public')
+#1 /usr/share/serverstats/includes/config.class.php(87): 
+require_once('/etc/serverstat...')
+#2 /usr/share/serverstats/includes/config.class.php(110): 
+config::loadConfig(Array, '/usr/share/serv...', Object(config))
+#3 /usr/share/serverstats/includes/config.class.php(127): 
+config-&gt;loadOffset('sources')
+#4 /usr/share/serverstats/update.php(35): config-&gt;offsetGet('sources')
+#5 {main}
+   thrown in /etc/serverstats/sources.php on line 41
+
+Kann diesen Fehler jemand deuten?? &#220;ber eure Hilfe w&#228;re ich dankbar.
+
+Gru&#223; Daniel
+
+Am 27.01.2014 13:51, schrieb Daniel K&#246;nig:
+&gt;<i> Hallo,
+</I>&gt;<i>
+</I>&gt;<i> ich versuche den SNMP Abfragen zum Laufen zu bekommen. Ich m&#246;chte 
+</I>&gt;<i> gewisse Parameter meiner Synologie Diskstation abfragen.
+</I>&gt;<i>
+</I>&gt;<i> Kann mir einer seinen Eintrag sources.php mailen mit dem SNMP 
+</I>&gt;<i> funktioniert?
+</I>&gt;<i>
+</I>&gt;<i> Bekomme laufen Fehlermeldungen, die ich nicht recht deuten kann.
+</I>&gt;<i>
+</I>&gt;<i> Danke
+</I>&gt;<i> Gru&#223; Daniel
+</I>
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000103.html">[Serverstats-user] SNMP Support
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#104">[ date ]</a>
+              <a href="thread.html#104">[ thread ]</a>
+              <a href="subject.html#104">[ subject ]</a>
+              <a href="author.html#104">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

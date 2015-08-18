@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] serverstats, vserver and snmp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20serverstats%2C%20vserver%20and%20snmp&In-Reply-To=%3C44A50630.4010204%40wanadoo.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000057.html">
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] serverstats, vserver and snmp</H1>
+    <B>S&#233;bastien CRAMATTE</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20serverstats%2C%20vserver%20and%20snmp&In-Reply-To=%3C44A50630.4010204%40wanadoo.fr%3E"
+       TITLE="[Serverstats-user] serverstats, vserver and snmp">s.cramatte at wanadoo.fr
+       </A><BR>
+    <I>Fri Jun 30 13:08:32 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000057.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#59">[ date ]</a>
+              <a href="thread.html#59">[ thread ]</a>
+              <a href="subject.html#59">[ subject ]</a>
+              <a href="author.html#59">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>David Danier a &#233;crit :
+&gt;&gt;<i> Maybe depends of net-snmp version ?
+</I>&gt;&gt;<i> See this extract !
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> No, i found the reason:
+</I>&gt;<i> snmp_set_valueretrieval(SNMP_VALUE_PLAIN);
+</I>&gt;<i> (see: <A HREF="http://www.php.net/snmp_set_valueretrieval">http://www.php.net/snmp_set_valueretrieval</A>)
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> ...
+</I>&gt;&gt;<i> string(20) &quot;INTEGER: 2112 KBytes&quot;
+</I>&gt;&gt;<i>  string(21) &quot;Gauge32: 1440 minutes&quot;
+</I>&gt;&gt;<i>  string(26) &quot;Counter32: 0 notifications&quot;
+</I>&gt;&gt;<i> ...
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Seems like if has this format:
+</I>&gt;<i> {TYPE}: {VALUE} {UNIT}
+</I>&gt;<i>
+</I>&gt;<i> Perhaps we can use the type to map it into rrd datasource types.
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>Good Idea !
+&gt;<i> Problems I see:
+</I>&gt;<i>  * INTEGER seems to be the Traffic-Counter(?)
+</I>&gt;<i>  * Not all values have this format ('notForwarding(2)')
+</I>&gt;<i>   
+</I>We need to test it ... but make graph against notForwarding(2) value is 
+useless ;)
+
+&gt;<i> Could you try the other possible methods for snmp_set_valueretrieval?
+</I>&gt;<i>  * SNMP_VALUE_LIBRARY
+</I> [1245]=&gt;
+  string(21) &quot;Gauge32: 1440 minutes&quot;
+
+&gt;<i>  * SNMP_VALUE_PLAIN
+</I>&gt;<i>   
+</I>  [1277]=&gt;
+  string(6) i&quot;
+  [1278]=&gt;
+  string(6) &quot;
+
+&gt;<i>  * SNMP_VALUE_OBJECT
+</I>&gt;<i>   
+</I> [1277]=&gt;
+  object(stdClass)#1278 (2) {
+    [&quot;type&quot;]=&gt;
+    int(6)
+    [&quot;value&quot;]=&gt;
+    string(24) &quot;SNMPv2-TM::snmpUDPDomain&quot;
+  }
+
+
+As I can  see the SNMP_VALUE_OBJECT seems to be the better way ?
+&gt;<i>   
+</I>&gt;&gt;<i> Waht is the diffrence between gauge32 en counter32 ?
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> A counter is used for values that really get counted (bytes on
+</I>&gt;<i> interface) and can be used to calculate per-second-values.
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>&gt;&gt;<i> IF-MIB::ifInOctets.4  returns a counter32 but you snmp source config the
+</I>&gt;&gt;<i> datasource as gauge ???
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Thats why you can define the datasource-type using
+</I>&gt;<i> snmp::addDatasourceDefinition(), it defaults to GAUGE.
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>I need to try this ...
+I've defined  this source
+
+$config['appli1']['module'] = new snmp('192.168.0.10', array(
+        'memtotal' =&gt; 'UCD-SNMP-MIB::memTotalReal.0',
+        'memfree' =&gt; 'UCD-SNMP-MIB::memAvailReal.0',
+        '1mn' =&gt; 'UCD-SNMP-MIB::laLoad.1',
+        '5mn' =&gt; 'UCD-SNMP-MIB::laLoad.2',
+        '15mn' =&gt; 'UCD-SNMP-MIB::laLoad.3'));
+
+
+I've tried to use your  graph.php load config againt this source but I 
+don't see the graphs (just see titles)
+the rrd file is created correctly  using this kind of data
+
+memtotal=843308
+memfree=3727436
+1mn=0.18
+5mn=0.18
+15mn=12.00
+
+Any ideas ?
+
+
+
+
+&gt;<i> Greetings, David Danier
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000057.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#59">[ date ]</a>
+              <a href="thread.html#59">[ thread ]</a>
+              <a href="subject.html#59">[ subject ]</a>
+              <a href="author.html#59">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

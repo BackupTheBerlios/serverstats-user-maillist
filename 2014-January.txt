@@ -1,0 +1,83 @@
+From daniel at koenigsmail.de  Mon Jan 27 13:51:51 2014
+From: daniel at koenigsmail.de (=?ISO-8859-1?Q?Daniel_K=F6nig?=)
+Date: Mon, 27 Jan 2014 13:51:51 +0100
+Subject: [Serverstats-user] SNMP Support
+Message-ID: <CAPjGPqBLeTvX90SF9Ysmmd=VAYVaj8_CBw7RTGXKHF14oM1Utw@mail.gmail.com>
+
+Hallo,
+
+ich versuche den SNMP Abfragen zum Laufen zu bekommen. Ich m?chte gewisse
+Parameter meiner Synologie Diskstation abfragen.
+
+Kann mir einer seinen Eintrag sources.php mailen mit dem SNMP funktioniert?
+
+Bekomme laufen Fehlermeldungen, die ich nicht recht deuten kann.
+
+Danke
+Gru? Daniel
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/serverstats-user/attachments/20140127/9922d209/attachment.html>
+
+From daniel at koenigsmail.de  Mon Jan 27 21:03:46 2014
+From: daniel at koenigsmail.de (=?ISO-8859-1?Q?Daniel_K=F6nig?=)
+Date: Mon, 27 Jan 2014 21:03:46 +0100
+Subject: [Serverstats-user] SNMP Support
+In-Reply-To: <CAPjGPqBLeTvX90SF9Ysmmd=VAYVaj8_CBw7RTGXKHF14oM1Utw@mail.gmail.com>
+References: <CAPjGPqBLeTvX90SF9Ysmmd=VAYVaj8_CBw7RTGXKHF14oM1Utw@mail.gmail.com>
+Message-ID: <52E6BBA2.7050503@koenigsmail.de>
+
+Hallo nochmal,
+
+hier mal meine config-Ausschnitt:
+
+$config['nas']['module'] = new snmp('192.168.10.2', array(
+         'MemTotal' => '1.3.6.1.4.1.2021.4.5.0',
+         'MemFree' => '1.3.6.1.4.1.2021.4.6.0 ',
+         'Cached' => '1.3.6.1.4.1.2021.4.11.0 ',
+         '1min' => '1.3.6.1.4.1.2021.10.1.5.1',
+         '5min' => '1.3.6.1.4.1.2021.10.1.5.2',
+         '15min' => '1.3.6.1.4.1.2021.10.1.5.3'),
+         'public');
+
+und die Fehlermeldung bei aufruf von:
+
+sudo php /usr/share/serverstats/update.php
+
+PHP Notice:  A non well formed numeric value encountered in 
+/etc/serverstats/sources.php on line 41
+PHP Fatal error:  Uncaught exception 'Exception' with message 
+'SNMP::__construct() expects parameter 2 to be string, array given' in 
+/etc/serverstats/sources.php:41
+Stack trace:
+#0 /etc/serverstats/sources.php(41): SNMP->__construct('192.168.10.2', 
+Array, 'public')
+#1 /usr/share/serverstats/includes/config.class.php(87): 
+require_once('/etc/serverstat...')
+#2 /usr/share/serverstats/includes/config.class.php(110): 
+config::loadConfig(Array, '/usr/share/serv...', Object(config))
+#3 /usr/share/serverstats/includes/config.class.php(127): 
+config->loadOffset('sources')
+#4 /usr/share/serverstats/update.php(35): config->offsetGet('sources')
+#5 {main}
+   thrown in /etc/serverstats/sources.php on line 41
+
+Kann diesen Fehler jemand deuten?? ?ber eure Hilfe w?re ich dankbar.
+
+Gru? Daniel
+
+Am 27.01.2014 13:51, schrieb Daniel K?nig:
+> Hallo,
+>
+> ich versuche den SNMP Abfragen zum Laufen zu bekommen. Ich m?chte 
+> gewisse Parameter meiner Synologie Diskstation abfragen.
+>
+> Kann mir einer seinen Eintrag sources.php mailen mit dem SNMP 
+> funktioniert?
+>
+> Bekomme laufen Fehlermeldungen, die ich nicht recht deuten kann.
+>
+> Danke
+> Gru? Daniel
+
+

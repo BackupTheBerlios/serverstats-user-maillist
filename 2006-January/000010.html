@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] I've done a French localization file for Serverstats
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-January/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20I%27ve%20done%20a%20French%20localization%20file%20for%20Serverstats&In-Reply-To=%3C43DDE12A.1050308%40team23.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000006.html">
+   <LINK REL="Next"  HREF="000007.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] I've done a French localization file for Serverstats</H1>
+    <B>David Danier</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20I%27ve%20done%20a%20French%20localization%20file%20for%20Serverstats&In-Reply-To=%3C43DDE12A.1050308%40team23.de%3E"
+       TITLE="[Serverstats-user] I've done a French localization file for Serverstats">david.danier at team23.de
+       </A><BR>
+    <I>Mon Jan 30 10:49:30 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000006.html">[Serverstats-user] I've done a French localization file for Serverstats
+</A></li>
+        <LI>Next message: <A HREF="000007.html">[Serverstats-user] How can I read a specific rrdfile ?  I use mailgraph to generate postfix rrd ...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> I've localized &quot;serverstats&quot; for french language   (see attached file)
+</I>
+Thanks a lot, this will be included in Serverstats 0.8.
+
+&gt;<i> Moreover I've changed  one line (line #33) in  detail.php to handle 
+</I>&gt;<i> Hour, Day, Month, Year  labels
+</I>&gt;<i> I supose that you should update de_DE.php file.
+</I>
+All Strings in config/graph.php are changeable by the user, they are
+part of the configuration. This includes the configuration which graphs
+are generated and their names.
+So this part of the english-strings is not intended to be translated by
+the script, like the titles of the graphs in the includes
+config/graph.php (which is an example).
+
+Perhaps it would be an idea to include translated
+config/graph.php-files. That could look like this:
+config/graph.php -&gt; english
+config/graph.php.de_DE -&gt; german
+config/graph.php.fr_FR -&gt; french
+But this would mean we have to sync all files to have the same
+configuration but different titles. Perhaps this should soonest happen
+when Serverstats 1.0 is released. Alternative we can update the
+documentation to tell the user to change this.
+
+Greetings, David Danier
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 189 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20060130/0c9bea6a/attachment.pgp">https://lists.berlios.de/pipermail/serverstats-user/attachments/20060130/0c9bea6a/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000006.html">[Serverstats-user] I've done a French localization file for Serverstats
+</A></li>
+	<LI>Next message: <A HREF="000007.html">[Serverstats-user] How can I read a specific rrdfile ?  I use mailgraph to generate postfix rrd ...
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#10">[ date ]</a>
+              <a href="thread.html#10">[ thread ]</a>
+              <a href="subject.html#10">[ subject ]</a>
+              <a href="author.html#10">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

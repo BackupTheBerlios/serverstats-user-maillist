@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20Launch%20Frequency%20%28WAS%3A%20Re%3A%20%5BServerstats-user%5D%20RRDTOOL%20Version%0A%20Exception%29&In-Reply-To=%3C4409863E.1080005%40team23.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000021.html">
+   <LINK REL="Next"  HREF="000023.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)</H1>
+    <B>David Danier</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20Launch%20Frequency%20%28WAS%3A%20Re%3A%20%5BServerstats-user%5D%20RRDTOOL%20Version%0A%20Exception%29&In-Reply-To=%3C4409863E.1080005%40team23.de%3E"
+       TITLE="Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)">david.danier at team23.de
+       </A><BR>
+    <I>Sat Mar  4 13:21:18 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000021.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+        <LI>Next message: <A HREF="000023.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#22">[ date ]</a>
+              <a href="thread.html#22">[ thread ]</a>
+              <a href="subject.html#22">[ subject ]</a>
+              <a href="author.html#22">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Reading up on RRDTOOL and the different way that it interpolates data. 
+</I>&gt;<i> What is a good launch frequency?  Every 5, 10, 15 mins?
+</I>
+I use a frequency of one minute, but 5 minutes should be fine for most
+setups.
+But thats mainly a question about how accurate you want the graphs to be.
+
+&gt;<i> Also is there a way to set the output to tell browsers not to cache the
+</I>&gt;<i> graphs.  As for a while I believed that it was not working until a
+</I>&gt;<i> browser refresh (and a graph folder delete) caused the new graphs to
+</I>&gt;<i> appear.
+</I>
+Perhaps the graphs were really not updated by the script. graph.php
+starts rrdtoo, with --lazy. So rrdtool only writes a new graph if there
+is something new to see on it. From the man-page:
+  [-z|--lazy]
+    Only generate the graph if the current graph is out of date or not
+    existent.
+
+You can change this in graph.php (line 247):
+  $rrdgraph-&gt;setLazy(false);
+(Sorry, no config-option so far)
+
+Disabling the caching at all should give the same result.
+($config['usecache'] in config/graph.php)
+
+Greetings, David Danier
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 191 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20060304/8a6c7ca7/attachment.pgp">https://lists.berlios.de/pipermail/serverstats-user/attachments/20060304/8a6c7ca7/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000021.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+	<LI>Next message: <A HREF="000023.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#22">[ date ]</a>
+              <a href="thread.html#22">[ thread ]</a>
+              <a href="subject.html#22">[ subject ]</a>
+              <a href="author.html#22">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

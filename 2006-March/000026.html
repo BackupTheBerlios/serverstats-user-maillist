@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Bus error; very high server load
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-March/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Bus%20error%3B%20very%20high%20server%20load&In-Reply-To=%3C20060311012156.GC19551%40cvmx.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000024.html">
+   <LINK REL="Next"  HREF="000027.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Bus error; very high server load</H1>
+    <B>Julius Plenz</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Bus%20error%3B%20very%20high%20server%20load&In-Reply-To=%3C20060311012156.GC19551%40cvmx.de%3E"
+       TITLE="[Serverstats-user] Bus error; very high server load">julius at plenz.com
+       </A><BR>
+    <I>Sat Mar 11 02:21:56 CET 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000024.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+        <LI>Next message: <A HREF="000027.html">[Serverstats-user] Graph config and setting the step
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#26">[ date ]</a>
+              <a href="thread.html#26">[ thread ]</a>
+              <a href="subject.html#26">[ subject ]</a>
+              <a href="author.html#26">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>Hi!
+
+I use serverstats at my server, with the traffic module from
+<A HREF="http://rootiewiki.de/wiki/Serverstats">http://rootiewiki.de/wiki/Serverstats</A> (site seems down atm). To update
+the stats, a crontab is run every minute:
+
+* * * * * php5-cgi /var/www/feh.name/serverstats/update.php &gt;/dev/null 2&gt;&amp;1
+
+This works great... except that occasionally the Server load goes up
+to something way beyond 20 (the last two times it was 25 and 34).
+This has happened about five times in the last few months.
+Then, the Cron daemon sends out a mail with the following content:
+
+    /bin/sh: line 1: 21693 Bus error               php5-cgi \
+    /var/www/feh.name/serverstats/update.php &gt;/dev/null 2&gt;&amp;1
+
+At the precise time this happens the traffic graph shows some sort of
+&quot;fluctuation&quot;, both in the RX and TX part.
+
+The traffic source uses the /proc/net/dev file to calculate the
+current traffic. Another tool that does that is `vnstat'. This tool,
+however, doesn't show the `networking peak'.
+
+Here you'll find two graphs. At approx. 8pm (20:00) the error happened:
+<A HREF="http://feh.name/error_1.png">http://feh.name/error_1.png</A>
+<A HREF="http://feh.name/error_1.png">http://feh.name/error_1.png</A>
+
+I don't care if some source produces an error. But taking the load up
+to more than 20 is not funny any more. :-/
+
+Have you guys any idea?
+
+I would appreciate every hint. Thank you.
+Julius
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000024.html">Launch Frequency (WAS: Re: [Serverstats-user] RRDTOOL Version Exception)
+</A></li>
+	<LI>Next message: <A HREF="000027.html">[Serverstats-user] Graph config and setting the step
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#26">[ date ]</a>
+              <a href="thread.html#26">[ thread ]</a>
+              <a href="subject.html#26">[ subject ]</a>
+              <a href="author.html#26">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Disk I/O
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2007-September/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Disk%20I/O&In-Reply-To=%3C20070928125753.GH30767%40charite.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   
+   
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Disk I/O</H1>
+    <B>Ralf Hildebrandt</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Disk%20I/O&In-Reply-To=%3C20070928125753.GH30767%40charite.de%3E"
+       TITLE="[Serverstats-user] Disk I/O">Ralf.Hildebrandt at charite.de
+       </A><BR>
+    <I>Fri Sep 28 14:57:53 CEST 2007</I>
+    <P><UL>
+        
+        
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#80">[ date ]</a>
+              <a href="thread.html#80">[ thread ]</a>
+              <a href="subject.html#80">[ subject ]</a>
+              <a href="author.html#80">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>I'm trying to monitor disk IO using serverstats-0.8
+
+# cat /proc/diskstats
+   2    0 fd0 0 0 0 0 0 0 0 0 0 0 0
+ 104    0 cciss/c0d0 826416 536280 57120648 18865576 10632533 16217501 215355944 2430938990 0 39050173 2453172184
+ 104    1 cciss/c0d0p1 0 0 0 0
+ 104    5 cciss/c0d0p5 696 4974 33 72
+ 104    6 cciss/c0d0p6 1360066 57091762 26915889 215327080
+ 104    7 cciss/c0d0p7 2985 23880 3534 28272
+   3    0 hda 0 0 0 0 0 0 0 0 0 0 0
+
+I want to monitor cciss/c0d0p6. So I put:
+
+        'disk' =&gt; array(
+           'used' =&gt; true,
+           'disks' =&gt; array('cciss/c0d0p6'),
+           'graphs' =&gt; array(
+	      'iorate' =&gt; array('used' =&gt; true, 'title' =&gt; 'IO-Rate (%s)')
+           )
+	),
+			       
+into simple.php. Now I'm getting this error:
+
+Working on disk_cciss__c0d0p6
+
+Warning: preg_match(): Unknown modifier 'c' in /webroot/default/serverstats-0.8/sources/disk.php on line 108
+Warning: preg_match(): Unknown modifier 'c' in /webroot/default/serverstats-0.8/sources/disk.php on line 108
+Warning: preg_match(): Unknown modifier 'c' in /webroot/default/serverstats-0.8/sources/disk.php on line 108
+Warning: preg_match(): Unknown modifier 'c' in /webroot/default/serverstats-0.8/sources/disk.php on line 108
+Warning: preg_match(): Unknown modifier 'c' in /webroot/default/serverstats-0.8/sources/disk.php on line 108
+Warning: preg_match(): Unknown modifier 'c' in /webroot/default/serverstats-0.8/sources/disk.php on line 108
+Warning: preg_match(): Unknown modifier 'c' in /webroot/default/serverstats-0.8/sources/disk.php on line 108
+Notice: Undefined index:  sectors_read in /webroot/default/serverstats-0.8/sources/disk.php on line 70
+Notice: Undefined index:  sectors_written in /webroot/default/serverstats-0.8/sources/disk.php on line 71
+Notice: Undefined index:  sectors_read in /webroot/default/serverstats-0.8/sources/disk.php on line 72
+Notice: Undefined index:  sectors_written in /webroot/default/serverstats-0.8/sources/disk.php on line 73
+        Updating RRD-file
+
+But I don't know why. According to line 108 of
+/webroot/default/serverstats-0.8/sources/disk.php, quotemeta() should
+ESCAPE the &quot;/&quot; in &quot;cciss/c0d0p6&quot; -- but that doesn't seem to happen.
+
+Likewise using:
+           'disks' =&gt; array('cciss\/c0d0p6'),
+doesn't work either. What am I doing wrong?
+-- 
+Ralf Hildebrandt (i.A. des IT-Zentrums)         <A HREF="https://lists.berlios.de/mailman/listinfo/serverstats-user">Ralf.Hildebrandt at charite.de</A>
+Charite - Universit&#228;tsmedizin Berlin            Tel.  +49 (0)30-450 570-155
+Gemeinsame Einrichtung von FU- und HU-Berlin    Fax.  +49 (0)30-450 570-962
+IT-Zentrum Standort CBF                    send no mail to <A HREF="https://lists.berlios.de/mailman/listinfo/serverstats-user">plonk at charite.de</A>
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	
+	
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#80">[ date ]</a>
+              <a href="thread.html#80">[ thread ]</a>
+              <a href="subject.html#80">[ subject ]</a>
+              <a href="author.html#80">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

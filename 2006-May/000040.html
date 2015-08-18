@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] serverstats, vserver and snmp
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-May/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20serverstats%2C%20vserver%20and%20snmp&In-Reply-To=%3C44630708.6010401%40team23.de%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000039.html">
+   <LINK REL="Next"  HREF="000041.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] serverstats, vserver and snmp</H1>
+    <B>David Danier</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20serverstats%2C%20vserver%20and%20snmp&In-Reply-To=%3C44630708.6010401%40team23.de%3E"
+       TITLE="[Serverstats-user] serverstats, vserver and snmp">david.danier at team23.de
+       </A><BR>
+    <I>Thu May 11 11:42:32 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000039.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+        <LI>Next message: <A HREF="000041.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>&gt;<i> Hello
+</I>
+Hello and sorry for the late answer.
+
+&gt;<i> I plan to use serverstats on vserver host (linux-vserver.org)
+</I>&gt;<i> And I would like to know If serverstats works with snmp.
+</I>
+There is no support for SNMP in Serverstats. It is planned, but I have
+no SNMP-server to test anything I write.
+
+&gt;<i> If yes how can
+</I>&gt;<i> I setup it ?
+</I>
+You can write your own SNMP-class. If you do so I would be interested in
+getting a copy.
+(See the included sources for examples)
+
+&gt;<i> Can I use simple config and the normal config on the same time  ?
+</I>&gt;<i> I've got  0.7 config for postfix so  I would like to reuse it
+</I>
+You can disable SimpleConfig if you have a working configuration
+already. If you want to use SimpleConfig you can use your own
+configuration at the same time. SimpleConfig only write to the normal
+config, but uses something like template to make it easier to use.
+
+Greetings, David Danier
+
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: signature.asc
+Type: application/pgp-signature
+Size: 191 bytes
+Desc: OpenPGP digital signature
+URL: &lt;<A HREF="https://lists.berlios.de/pipermail/serverstats-user/attachments/20060511/699e4a48/attachment.pgp">https://lists.berlios.de/pipermail/serverstats-user/attachments/20060511/699e4a48/attachment.pgp</A>&gt;
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000039.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+	<LI>Next message: <A HREF="000041.html">[Serverstats-user] serverstats, vserver and snmp
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#40">[ date ]</a>
+              <a href="thread.html#40">[ thread ]</a>
+              <a href="subject.html#40">[ subject ]</a>
+              <a href="author.html#40">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>

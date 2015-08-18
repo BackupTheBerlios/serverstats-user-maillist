@@ -1,0 +1,227 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<HTML>
+ <HEAD>
+   <TITLE> [Serverstats-user] Feature request
+   </TITLE>
+   <LINK REL="Index" HREF="http://lists.berlios.de/pipermail/serverstats-user/2006-June/index.html" >
+   <LINK REL="made" HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Feature%20request&In-Reply-To=%3C44A511F1.70509%40wanadoo.fr%3E">
+   <META NAME="robots" CONTENT="index,nofollow">
+   <style type="text/css">
+       pre {
+           white-space: pre-wrap;       /* css-2.1, curent FF, Opera, Safari */
+           }
+   </style>
+   <META http-equiv="Content-Type" content="text/html; charset=us-ascii">
+   <LINK REL="Previous"  HREF="000058.html">
+   <LINK REL="Next"  HREF="000061.html">
+ </HEAD>
+ <BODY BGCOLOR="#ffffff">
+   <H1>[Serverstats-user] Feature request</H1>
+    <B>S&#233;bastien CRAMATTE</B> 
+    <A HREF="mailto:serverstats-user%40lists.berlios.de?Subject=Re%3A%20%5BServerstats-user%5D%20Feature%20request&In-Reply-To=%3C44A511F1.70509%40wanadoo.fr%3E"
+       TITLE="[Serverstats-user] Feature request">s.cramatte at wanadoo.fr
+       </A><BR>
+    <I>Fri Jun 30 13:58:41 CEST 2006</I>
+    <P><UL>
+        <LI>Previous message: <A HREF="000058.html">[Serverstats-user] Feature request
+</A></li>
+        <LI>Next message: <A HREF="000061.html">[Serverstats-user] another SNMP source patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#60">[ date ]</a>
+              <a href="thread.html#60">[ thread ]</a>
+              <a href="subject.html#60">[ subject ]</a>
+              <a href="author.html#60">[ author ]</a>
+         </LI>
+       </UL>
+    <HR>  
+<!--beginarticle-->
+<PRE>David Danier a &#233;crit :
+&gt;&gt;<i> I've few features requests ;)
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Perhaps I should give you SVN-access? :)
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>Why not ... but currently I'm overbooked :(
+
+
+&gt;&gt;<i> - XML config file (I plan to use my Xforms engine to make interface for
+</I>&gt;&gt;<i> serversstats, see : <A HREF="http://sourceforge.net/project/concentre-xml">http://sourceforge.net/project/concentre-xml</A>)
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Nice project!
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>Thanks but I should need to send you somes examples
+In reality we could use  my MVC framework to design serverstats 
+interface and  Xforms to design forms
+
+My Xforms engine  works natively with xml and ajax this is why
+
+Because most of people don't like cacti  ... but don't use  you program 
+because you don't have web interface 
+most of people want 5 mn up and running  software ...
+
+&gt;<i> The problem with XML-files is that currently the config needs to be
+</I>&gt;<i> parsed by PHP (parts of it, see config/sources.php). This is not
+</I>&gt;<i> possible if you have a string without using eval. With SimpleConfig this
+</I>&gt;<i> dependency is extended to the graph-config.
+</I>&gt;<i>   
+</I>You can use dom ?
+Just need to do a recursive traverse DOM method  (this code is an 
+example, I've not tested it )
+-------------------
+class config extends domDocument {
+
+    public function __construct() {
+            parent::__construct();
+||<i>    }
+</I>   
+    public function __destruct() {
+            parent::__destruct();
+    }
+
+    private function __traverse($node) {
+        $result = array();      
+|<i>
+</I>    /* parse your element here */
+
+|<i>       |foreach ($node-&gt;attributes as $key =&gt; $value) {
+</I>       /* parse your attributes here */
+    }
+|<i>
+</I>       |foreach ($node-&gt;childNodes as $child) {
+      if ($child-&gt;nodeType==1) { /* ELEMENT */
+          array_push($result,$this-&gt;__traverse($child));
+     
+      }
+   }
+
+    return $result;
+|<i>    }
+</I>
+    public function parse() {
+|<i>     $this-&gt;root = $this-&gt;documentElement;|
+</I>          return $this-&gt;traverse ($this-&gt;root);
+    }
+
+  
+    public function __call($name , $arguments) {
+          /* called by default if method doesn't exists */
+    }
+}
+
+$dom = new new config();
+$dom-&gt;load(&quot;config.xml&quot;);
+
+$config  = $dom-&gt;parse();
+print_r ($config);
+
+
+--------------
+Look this PHP5 xml resources :
+ 
+<A HREF="http://php5.bitflux.org/phpconf2004/toc.php">http://php5.bitflux.org/phpconf2004/toc.php</A>
+<A HREF="http://www.bitflux.ch/publikationen/vortraege.html">http://www.bitflux.ch/publikationen/vortraege.html</A>
+
+Note : it's important to always define   xml namespace 
+(xmlsns=&quot;urn:serverstats&quot;)
+We should make a xsd xml schema too to validate configuration.
+
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;sources   xmlns=&quot;urn:serverstats&quot; &gt;
+    &lt;source id=&quot;cpu-localhost&quot; type=&quot;cpu&quot; /&gt;
+    &lt;source id=&quot;memory-localhost&quot; type=&quot;memory&quot; /&gt;
+    &lt;source id=&quot;appli1&quot; type=&quot;snmp&quot;&gt;
+              &lt;host&quot;&gt;192.168.0.12&lt;/host&gt;
+              &lt;comunity&quot;&gt;public&lt;/comunity&gt;
+              &lt;objects&gt;  
+                &lt;object id=&quot;memtotal'&gt;UCD-SNMP-MIB::memTotalReal.0&lt;/object&gt;
+                &lt;object id=&quot;memfree&quot;&gt;UCD-SNMP-MIB::memAvailReal.0&lt;/object&gt;
+                &lt;object id=&quot;1mn&quot;&gt;UCD-SNMP-MIB::laLoad.1&lt;/object&gt;
+               &lt;/objects&gt;
+    &lt;/source&gt;
+&lt;/sources&gt;
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot; ?&gt;
+&lt;graphs   xmlns=&quot;urn:serverstats&quot; &gt;
+    &lt;graph&gt;
+       &lt;title&gt;Load&lt;/title&gt;
+        &lt;lowerLimit&gt;0&lt;/lowerlimit&gt;
+        &lt;altAutoscaleMax&gt;true&lt;/altAutoscaleMax&gt;
+        &lt;content type=&quot;COMMENT&quot;&gt;
+                &lt;text&gt;average number of tasks in the queue\:\n'&lt;/text&gt;
+        &lt;/content&gt;
+        &lt;content type=&quot;LINE&quot; &gt;
+                &lt;source&gt;appli1&lt;/source&gt;
+                 &lt;ds&gt;1min&lt;/ds&gt;
+                 &lt;cf&gt;AVERAGE&lt;/cf&gt;
+                  &lt;legend&gt;1 minute&lt;/legend&gt;
+                  &lt;width&gt;1&lt;/width&gt;
+                   &lt;color&gt;FFDD00&lt;/color&gt;
+        &lt;/content&gt;
+        &lt;content type=&quot;GPRINT&quot;&gt;
+                 &lt;name&gt;load_1min&lt;/name&gt;
+                 &lt;cf&gt;LAST&lt;/cf&gt;
+                  &lt;format&gt;cur\: %01.2lf'&lt;/format&gt;
+        &lt;/content&gt;
+    &lt;/graph&gt;
+&lt;/graphs&gt;
+
+&gt;<i> (To be precisely: It is possible to call funktions/methods...but not to
+</I>&gt;<i> create new objects with a variable amount of arguments. If you have a
+</I>&gt;<i> clean idea to do this, please tell me)
+</I>&gt;<i>   
+</I>Maybe an XSL stylesheets to create php config file ...
+if you use  &lt;xsl:output type=&quot;text&quot; /&gt; you can produce a  .php file ...
+
+But I believe that is fare better to do it directly with dom ...
+The only problem is that update.php read the config file  each time is 
+called ...  If the configuration is big  (lots of snmp datats, lots of 
+servers)
+maybe a daemon approach  could be a solution
+
+<A HREF="http://www.phpclasses.org/browse/file/8958.html">http://www.phpclasses.org/browse/file/8958.html</A>
+
+But require  special  php5-cli  configure option
+
+&gt;<i>   
+</I>&gt;&gt;<i> - Templates (I mean, for example,  if you monitor various servers via
+</I>&gt;&gt;<i> snmp, you should monitor  cpu usage, memory, disk, ... so this the
+</I>&gt;&gt;<i> source config is the same, just change  host )
+</I>&gt;&gt;<i>     
+</I>&gt;<i>
+</I>&gt;<i> Thats on my todo-list. Should replace the SimpleConfig, as a
+</I>&gt;<i> template-system is more powerfull and useable.
+</I>&gt;<i> <A HREF="http://svn.berlios.de/svnroot/repos/serverstats/trunk/FEATURE_REQUEST">http://svn.berlios.de/svnroot/repos/serverstats/trunk/FEATURE_REQUEST</A>
+</I>&gt;<i>
+</I>&gt;<i> Greetings, David Danier
+</I>&gt;<i>
+</I>&gt;<i>   
+</I>
+
+
+</PRE>
+
+<!--endarticle-->
+    <HR>
+    <P><UL>
+        <!--threads-->
+	<LI>Previous message: <A HREF="000058.html">[Serverstats-user] Feature request
+</A></li>
+	<LI>Next message: <A HREF="000061.html">[Serverstats-user] another SNMP source patch
+</A></li>
+         <LI> <B>Messages sorted by:</B> 
+              <a href="date.html#60">[ date ]</a>
+              <a href="thread.html#60">[ thread ]</a>
+              <a href="subject.html#60">[ subject ]</a>
+              <a href="author.html#60">[ author ]</a>
+         </LI>
+       </UL>
+
+<hr>
+<a href="https://lists.berlios.de/mailman/listinfo/serverstats-user">More information about the Serverstats-user
+mailing list</a><br>
+</body></html>
